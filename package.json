@@ -1,22 +1,28 @@
 {
-  "name": "bue",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/bowencool/Bue.git"
-  },
-  "keywords": [
-    "mvvm"
-  ],
-  "author": "bowencool",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bowencool/Bue/issues"
-  },
-  "homepage": "https://github.com/bowencool/Bue#readme"
+	"name": "bue",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "webpack"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/bowencool/Bue.git"
+	},
+	"keywords": [
+		"mvvm"
+	],
+	"author": "bowencool",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/bowencool/Bue/issues"
+	},
+	"homepage": "https://github.com/bowencool/Bue#readme",
+	"devDependencies": {
+		"webpack": "^4.16.0",
+		"webpack-command": "^0.4.1",
+		"webpack-merge": "^4.1.3"
+	}
 }
