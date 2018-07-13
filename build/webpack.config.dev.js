@@ -8,7 +8,7 @@ const resolve = (...p) => path.resolve(__dirname, ...p);
 module.exports = merge(baseConfig, {
 	mode: 'development',
 	entry: {
-		example: resolve('../example/index.js')
+		example: resolve('../example/index.js'),
 	},
 	devServer: {
 		contentBase: resolve('dev'),
@@ -27,7 +27,7 @@ module.exports = merge(baseConfig, {
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
 			template: 'example/index.html',
-			inject: true
-		})
-	]
+			inject: true,
+		}),
+	],
 });
