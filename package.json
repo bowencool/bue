@@ -4,12 +4,14 @@
 	"description": "",
 	"main": "dist/bue.min.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "webpack"
+		"start": "npm run dev",
+		"dev": "webpack-dev-server --progress --config build/webpack.config.dev.js",
+		"build": "webpack --config build/webpack.config.prod.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+ssh://git@github.com/bowencool/Bue.git"
+		"url": "git+ssh://git@github.com/bowencool/bue.git"
 	},
 	"keywords": [
 		"mvvm"
@@ -17,12 +19,14 @@
 	"author": "bowencool",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/bowencool/Bue/issues"
+		"url": "https://github.com/bowencool/bue/issues"
 	},
-	"homepage": "https://github.com/bowencool/Bue#readme",
+	"homepage": "https://github.com/bowencool/bue#readme",
 	"devDependencies": {
+		"html-webpack-plugin": "^3.2.0",
 		"webpack": "^4.16.0",
 		"webpack-cli": "^3.0.8",
+		"webpack-dev-server": "^3.1.4",
 		"webpack-merge": "^4.1.3"
 	}
 }
