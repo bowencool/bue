@@ -1,6 +1,6 @@
 module.exports = {
-  extends: ['@commitlint/config-angular'],
-  rules: {
-    'subject-case': [0],
-  },
+	extends: ['@commitlint/config-angular'],
+	rules: {
+		'subject-case': [0],
+	},
 };

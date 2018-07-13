@@ -4,7 +4,7 @@ new Bue({
 	el: '#app',
 	data() {
 		return {
-			name: 'bue'
-		}
-	}
-})
+			name: 'bue',
+		};
+	},
+});
