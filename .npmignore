@@ -1,0 +1,8 @@
+build/
+node_modules/
+src/
+.babelrc
+.editorconfig
+.gitignore
+.npmignore
+yarn.lock
