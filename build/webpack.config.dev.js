@@ -9,6 +9,7 @@ module.exports = merge(baseConfig, {
 	entry: {
 		example: resolve('example/index.js'),
 	},
+	devtool: 'source-map',
 	devServer: {
 		contentBase: resolve('dev'),
 		port: 9000,
