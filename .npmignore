@@ -1,8 +1,10 @@
 build/
+example/
 node_modules/
-src/
-.babelrc
 .editorconfig
 .gitignore
+.babelrc
+.prettier*
+commitlint.config.js
 .npmignore
 yarn.lock

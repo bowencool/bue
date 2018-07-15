@@ -1,6 +1,6 @@
 {
 	"name": "bowen-bue",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "",
 	"unpkg": "dist/bue.min.js",
 	"main": "dist/bue.js",
