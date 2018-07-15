@@ -1,6 +1,6 @@
 {
-	"name": "bue",
-	"version": "0.0.1",
+	"name": "bowen-bue",
+	"version": "0.0.3",
 	"description": "",
 	"unpkg": "dist/bue.min.js",
 	"main": "dist/bue.js",
@@ -8,6 +8,7 @@
 		"start": "npm run dev",
 		"dev": "webpack-dev-server --progress --config build/webpack.config.dev.js",
 		"build": "webpack --config build/webpack.config.prod.js && webpack --config build/webpack.config.doc.js",
+		"pub": "npm run build && npm publish",
 		"prettier": "prettier --write ./src/**/* && prettier --write ./example/**/*",
 		"commitmsg": "commitlint -E GIT_PARAMS",
 		"precommit": "lint-staged",

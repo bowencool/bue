@@ -11,6 +11,7 @@ module.exports = merge(baseConfig, {
 		path: path.resolve(__dirname, '../dist'),
 		filename: 'bue.min.js',
 		library: 'Bue',
+		libraryExport: 'default',
 		libraryTarget: 'umd',
 	},
 });
