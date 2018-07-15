@@ -1,11 +1,12 @@
 import { typeOf, hasOwn, warn, isReserved, proxy } from '../../utils';
+import { observe } from '../observer';
 
 export function initState(bm) {
 	const opt = bm.$options;
 	if (opt.data) {
 		initData(bm);
 	} else {
-		// observe(bm._data = {});
+		observe((bm._data = {}));
 	}
 }
 
@@ -31,5 +32,5 @@ function initData(bm) {
 			}
 		}
 	}
-	// observe(data);
+	observe(data);
 }
