@@ -1,7 +1,18 @@
+const { resolve } = require('./utils');
+
 module.exports = {
 	resolve: {
 		alias: {
-			'@bowen/bue$': '../src/core/index.js',
+			buejs: '../src/core/index.js',
 		},
+	},
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				loader: 'babel-loader',
+				include: [resolve('src')],
+			},
+		],
 	},
 };

@@ -1,4 +1,4 @@
-import Bue from '@bowen/bue';
+import Bue from 'buejs';
 
 new Bue({
 	el: '#app',
