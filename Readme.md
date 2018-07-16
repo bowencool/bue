@@ -7,7 +7,7 @@ npm i buejs
 ```
 Or
 ``` html
-<script scr="http://unpkg.com/buejs/dist/bue.min.js"></script>
+<script scr="http://unpkg.com/buejs"></script>
 ```
 
 ## Usage
