@@ -1,4 +1,7 @@
+import Watcher from './Watcher';
+
 let uid = 0;
+
 export default class Dep {
 	// the current target watcher being evaluated.
 	// this is globally unique because there could be only one
@@ -9,31 +12,31 @@ export default class Dep {
 		this.id = ++uid;
 		this.watchers = [];
 	}
-	/**
-	 * @param {Watcher} watcher
-	 */
-	addWatcher(watcher) {
+
+	private id: number;
+	private watchers: Watcher[];
+
+	addWatcher(watcher: Watcher): void {
 		this.watchers.push(watcher);
 	}
-	/**
-	 * @param {Watcher} watcher
-	 */
-	removeWatcher(watcher) {
+
+	removeWatcher(watcher: Watcher): void {
 		const index = this.watchers.indexOf(watcher);
 		if (index > -1) {
 			this.watchers.splice(index, 1);
 		}
 	}
+
 	notify() {
 		this.watchers.forEach(w => {
 			w.update();
 		});
 	}
-	depend() {
-		if (Dep.target) {
-			Dep.target.addDep(this);
-		}
-	}
+	// depend() {
+	// 	if (Dep.target) {
+	// 		Dep.target.addDep(this);
+	// 	}
+	// }
 }
 
 // const targetStack = [];

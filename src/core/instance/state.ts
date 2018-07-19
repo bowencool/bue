@@ -1,17 +1,17 @@
 import Bue from '..';
 import { typeOf, hasOwn, warn, isReserved, proxy } from '../../utils';
-// import { observe } from '../observer';
+import { observe } from '../observer';
 
-export function initState(bm: Bue) {
+export function initState(bm: Bue): void {
 	const { data } = bm.$options;
 	if (data) {
 		initData(bm);
 	} else {
-		// observe((bm._data = {}));
+		observe((bm._data = {}));
 	}
 }
 
-function initData(bm: Bue) {
+function initData(bm: Bue): void {
 	let { data, methods } = bm.$options;
 	data = bm._data = typeof data === 'function' ? data.call(bm) : data;
 	if (typeOf(data) === 'object') {
@@ -27,6 +27,5 @@ function initData(bm: Bue) {
 			}
 		}
 	}
-	// observe(data);
-	console.log(`observe(data);`);
+	observe(data);
 }
