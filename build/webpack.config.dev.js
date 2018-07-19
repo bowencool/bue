@@ -7,7 +7,7 @@ const baseConfig = require('./webpack.config.base');
 module.exports = merge(baseConfig, {
 	mode: 'development',
 	entry: {
-		example: resolve('example/index.js'),
+		example: resolve('example/index.ts'),
 	},
 	devtool: 'source-map',
 	devServer: {
