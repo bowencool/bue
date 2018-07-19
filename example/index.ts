@@ -1,4 +1,4 @@
-import Bue from 'buejs';
+import Bue from '../src/core';
 
 window.bm = new Bue({
 	el: '#app',

@@ -1,10 +1,11 @@
-const { resolve } = require('./utils');
+// const { resolve } = require('./utils');
 
 module.exports = {
 	resolve: {
-		alias: {
-			buejs: '../src/core/index.ts',
-		},
+		// alias: {
+		// 	buejs: '../src/core/index.ts',
+		// },
+		extensions: ['.ts', '.js', '.json'],
 	},
 	module: {
 		rules: [
@@ -16,6 +17,7 @@ module.exports = {
 			{
 				test: /\.ts$/,
 				loader: 'ts-loader',
+				exclude: /node_modules/,
 				options: {
 					transpileOnly: true, //HMR doesn't work without this
 				},
