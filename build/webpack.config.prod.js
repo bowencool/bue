@@ -14,4 +14,7 @@ module.exports = merge(baseConfig, {
 		libraryExport: 'default',
 		libraryTarget: 'umd',
 	},
+	stats: {
+		modules: false,
+	},
 });

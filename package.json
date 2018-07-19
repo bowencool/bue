@@ -7,7 +7,7 @@
 	"scripts": {
 		"start": "npm run dev",
 		"dev": "webpack-dev-server --progress --config build/webpack.config.dev.js",
-		"build": "webpack --config build/webpack.config.prod.js && webpack --config build/webpack.config.doc.js",
+		"build": "webpack --config build/webpack.config.doc.js && webpack --config build/webpack.config.prod.js",
 		"pub": "npm run build && npm publish",
 		"prettier": "prettier --write ./src/**/* && prettier --write ./example/**/*",
 		"commitmsg": "commitlint -E GIT_PARAMS",
