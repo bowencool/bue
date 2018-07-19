@@ -1,28 +1,23 @@
+import Bue from '..';
 import { typeOf, hasOwn, warn, isReserved, proxy } from '../../utils';
-import { observe } from '../observer';
+// import { observe } from '../observer';
 
-export function initState(bm) {
-	const opt = bm.$options;
-	if (opt.data) {
+export function initState(bm: Bue) {
+	const { data } = bm.$options;
+	if (data) {
 		initData(bm);
 	} else {
-		observe((bm._data = {}));
+		// observe((bm._data = {}));
 	}
 }
 
-function initData(bm) {
-	let { data, methods, props } = bm.$options;
+function initData(bm: Bue) {
+	let { data, methods } = bm.$options;
 	data = bm._data = typeof data === 'function' ? data.call(bm) : data;
 	if (typeOf(data) === 'object') {
 		for (const key in data) {
 			if (methods && hasOwn(methods, key)) {
 				warn(`The method "${key}" has already been declared as a data property.`);
-			}
-
-			if (props && hasOwn(props, key)) {
-				warn(
-					`The data property "${key}" is already declared as a prop. \nUse prop default value instead.`
-				);
 			}
 
 			if (isReserved(key)) {
@@ -32,5 +27,6 @@ function initData(bm) {
 			}
 		}
 	}
-	observe(data);
+	// observe(data);
+	console.log(`observe(data);`);
 }

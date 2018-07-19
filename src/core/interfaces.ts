@@ -3,7 +3,7 @@ export interface ComputedOptions {
 		| (() => any)
 		| {
 				get: () => any;
-				set: () => any;
+				set: () => void;
 		  };
 }
 
