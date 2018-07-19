@@ -1,10 +1,8 @@
-import initMixin from '../instance/initMixin';
+import initMixin from './instance/initMixin';
 
 @initMixin
-class Bue {
+export default class Bue {
 	constructor(options) {
-		// this.$options = options;
 		this._init(options);
 	}
 }
-export default Bue;
