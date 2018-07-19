@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"module": "es2015",
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"sourceMap": true
+	},
+	"include": ["src/**/*", "example/**/*"],
+	"exclude": ["node_modules", "**/*.spec.ts"]
+}
