@@ -6,7 +6,7 @@ export default class Dep {
 	// the current target watcher being evaluated.
 	// this is globally unique because there could be only one
 	// watcher being evaluated at any time.
-	// static target = null;
+	static target: Watcher = null;
 
 	constructor() {
 		this.id = ++uid;

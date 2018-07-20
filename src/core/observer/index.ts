@@ -1,15 +1,26 @@
-/**
- * 观察一个目标
- */
-export function observe(target: object): void {
-	for (const key in target) {
-		defineReactive(target, key, target[key]);
-	}
-}
+import Observer from './Observer';
 
 /**
- * 定义响应式属性（数据劫持）
+ * 观察一个目标/数据
  */
-export function defineReactive(target: object, key: string, val?: any): void {
-	console.log(key, val);
+export function observe(data: any): Observer {
+	if (!data || typeof data !== 'object') {
+		return;
+	}
+	// 已经观察过
+	if (data.__ob__) {
+		return data.__ob__;
+	}
+
+	const __ob__ = new Observer(data);
+	Object.defineProperty(data, '__ob__', {
+		configurable: false,
+		writable: false,
+		enumerable: false,
+		get() {
+			return __ob__;
+		},
+	});
+
+	return __ob__;
 }
