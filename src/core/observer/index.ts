@@ -7,19 +7,19 @@ export function observe(data: any): Observer {
 	if (!data || typeof data !== 'object') {
 		return;
 	}
+
 	// 已经观察过
 	if (data.__ob__) {
 		return data.__ob__;
 	}
 
 	const __ob__ = new Observer(data);
+
 	Object.defineProperty(data, '__ob__', {
 		configurable: false,
 		writable: false,
 		enumerable: false,
-		get() {
-			return __ob__;
-		},
+		value: __ob__,
 	});
 
 	return __ob__;
