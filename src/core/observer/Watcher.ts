@@ -5,5 +5,7 @@ export default class Watcher {
 		console.log(expOrFn);
 	}
 
-	public update(): void {}
+	public update(): void {
+		console.log('watcher.updated.');
+	}
 }

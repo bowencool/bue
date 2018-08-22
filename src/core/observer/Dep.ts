@@ -28,6 +28,7 @@ export default class Dep {
 	}
 
 	notify() {
+		console.log('TODO: dep.notify: ', this.watchers);
 		this.watchers.forEach(w => {
 			w.update();
 		});
