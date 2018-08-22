@@ -223,9 +223,7 @@
 						configurable: false,
 						writable: false,
 						enumerable: false,
-						get: function() {
-							return __ob__;
-						},
+						value: __ob__,
 					});
 					return __ob__;
 				}
