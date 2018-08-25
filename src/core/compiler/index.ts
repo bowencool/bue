@@ -4,9 +4,6 @@ import utils from './utils';
 const isElementNode = (node: any): boolean => node.nodeType == 1;
 const isTextNode = (node: any): boolean => node.nodeType == 3;
 
-// const isDirective = (name: string): boolean => name.startsWith('b-');
-// const isEventDirective = (name: string): boolean => name.startsWith('@');
-
 const node2Fragment = (node: Node): DocumentFragment => {
 	const fragment = document.createDocumentFragment();
 	while (node.firstChild) {
@@ -58,6 +55,6 @@ export default class Compiler {
 
 	private compileText(node: Node, key: string) {
 		// TODO
-		// console.log('compileText: ', node, key);
+		utils.bind(node, this.$bm, key, 'text');
 	}
 }
