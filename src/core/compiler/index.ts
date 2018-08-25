@@ -32,7 +32,7 @@ export default class Compiler {
 			if (isElementNode(node)) {
 				this.compileNode(node);
 			} else if (isTextNode(node) && /{{\s*(.*)\s*}}/.test(node.textContent)) {
-				this.compileText(node, RegExp.$1);
+				this.compileText(node, node.textContent);
 			}
 			if (node.childNodes && node.childNodes.length) {
 				this.compileElement(node);
@@ -53,8 +53,8 @@ export default class Compiler {
 		});
 	}
 
-	private compileText(node: Node, key: string) {
+	private compileText(node: Node, initialContent: string) {
 		// TODO
-		utils.bind(node, this.$bm, key, 'text');
+		utils.text(node, this.$bm, initialContent);
 	}
 }

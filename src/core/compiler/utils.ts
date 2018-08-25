@@ -5,7 +5,7 @@ const getBMValue = (bm: Bue, path: string): any => {
 	if (path in bm) {
 		return bm[path];
 	}
-	let val;
+	let val: any;
 	path.split('.').forEach(p => {
 		val = val[p];
 	});
@@ -13,9 +13,10 @@ const getBMValue = (bm: Bue, path: string): any => {
 };
 
 export default {
+	text(node: Node, bm: Bue, initialContent: string) {},
 	bind(node: Node, bm: Bue, exp: string, dir: string) {
 		const updater = updaters[dir];
-		updater && updater(node, exp, getBMValue(bm, exp));
+		updater && updater(node, getBMValue(bm, exp));
 	},
 	eventHandler(node: Node, bm: Bue, exp: string, dir: string): void {
 		const eventType = exp;
