@@ -51,3 +51,14 @@ export function proxy(target: object, sourceKey: string, key: string): void {
 		},
 	});
 }
+
+export const findValue = (target: object, path: string): any => {
+	if (path in target) {
+		return target[path];
+	}
+	let val: any;
+	path.split('.').forEach(p => {
+		val = val[p];
+	});
+	return val;
+};
