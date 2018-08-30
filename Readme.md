@@ -1,13 +1,15 @@
 # Bue
-> 自己瞎写的MVVM，参考了Vue，建设中。。。
+> Working In Progress
 
 ## Install
 ``` bash
 npm i buejs
 ```
-Or
+### Or
 ``` html
 <script scr="http://unpkg.com/buejs"></script>
+<!-- or -->
+<script scr="https://cdn.jsdelivr.net/npm/buejs"></script>
 ```
 
 ## Usage
