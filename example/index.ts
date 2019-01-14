@@ -9,17 +9,17 @@ window.bm = new Bue({
 	// </div>`,
 	data() {
 		return {
-			name: 'bue',
+			name: 'hello, bue',
 		};
 	},
-	computed: {
-		greeting() {
-			return `Hello, ${this.name}!`;
-		},
-	},
+	// computed: {
+	// 	greeting() {
+	// 		return `Hello, ${this.name}!`;
+	// 	},
+	// },
 	methods: {
-		greet() {
-			alert(this.name);
+		reset() {
+			this.name = 'hello, bue';
 		},
 	},
 });

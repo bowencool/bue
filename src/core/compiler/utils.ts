@@ -1,27 +1,20 @@
 import Bue from '../index';
+import Watcher from '../observer/Watcher';
 import updaters from './updaters';
 import { findValue } from '../../utils';
 
-const getBMTextContent = (bm: Bue, initialContent: string): string => {
-	return initialContent.replace(/{{\s*([^\.{][\w\.]+?[^\.}])\s*}}/g, (match, key) => {
-		try {
-			const v = findValue(bm, key);
-			return v === undefined ? match : v;
-		} catch (e) {}
-		return match;
-	});
-};
-
 export default {
-	text(node: Node, bm: Bue, initialContent: string) {
+	text(node: Node, bm: Bue, exp: string) {
 		const updater = updaters.text;
-		updater(node, getBMTextContent(bm, initialContent));
+		updater(node, findValue(bm, exp));
+		this.bind(node, bm, exp, 'text');
 	},
-	// bind(node: Node, bm: Bue, exp: string, dir: string) {
-	// 	const updater = updaters[dir];
-	// 	updater && updater(node, getBMTextContent(bm, exp));
-	// 	// todo new Watcher({})
-	// },
+	bind(node: Node, bm: Bue, exp: string, dir: string) {
+		const updater: Function = updaters[dir];
+		new Watcher(bm, exp, function(value: string, oldValue?: string) {
+			updater && updater(node, value, oldValue);
+		});
+	},
 	eventHandler(node: Node, bm: Bue, exp: string, dir: string): void {
 		const eventType = exp;
 		const fn = bm.$options.methods && bm.$options.methods[dir];
