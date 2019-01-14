@@ -1,5 +1,5 @@
 # Bue
-> Working In Progress
+> An MVVM framework, [Live Demo](https://bowencool.github.io/bue/)
 
 ## Install
 ``` bash
