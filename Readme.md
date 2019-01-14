@@ -1,21 +1,39 @@
 # Bue
-> 自己瞎写的MVVM，参考了Vue，建设中。。。
+> Working In Progress
 
 ## Install
 ``` bash
 npm i buejs
 ```
-Or
+### Or
 ``` html
-<script scr="http://unpkg.com/buejs/dist/bue.min.js"></script>
+<script scr="http://unpkg.com/buejs"></script>
+<!-- or -->
+<script scr="https://cdn.jsdelivr.net/npm/buejs"></script>
 ```
 
 ## Usage
+``` html
+<div id="app">
+	<div>
+		<h1>{{name}}</h1>
+		<input b-model="name" />
+	</div>
+	<button @click="reset">reset</button>
+</div>
+```
 ``` js
 new Bue({
-	el: "#app",
-	data: {
-		name: "bue"
-	}
+	el: '#app',
+	data() {
+		return {
+			name: 'hello, bue',
+		};
+	},
+	methods: {
+		reset() {
+			this.name = 'hello, bue';
+		},
+	},
 })
 ```

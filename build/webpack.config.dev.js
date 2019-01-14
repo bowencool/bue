@@ -1,16 +1,15 @@
-const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { resolve } = require('./utils');
 const baseConfig = require('./webpack.config.base');
-
-const resolve = (...p) => path.resolve(__dirname, ...p);
 
 module.exports = merge(baseConfig, {
 	mode: 'development',
 	entry: {
-		example: resolve('../example/index.js'),
+		example: resolve('example/index.ts'),
 	},
+	devtool: 'source-map',
 	devServer: {
 		contentBase: resolve('dev'),
 		port: 9000,

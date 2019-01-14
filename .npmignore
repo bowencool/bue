@@ -1,10 +1,6 @@
 build/
 example/
 node_modules/
-.editorconfig
-.gitignore
-.babelrc
-.prettier*
+.**/*
 commitlint.config.js
-.npmignore
 yarn.lock
