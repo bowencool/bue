@@ -7,9 +7,9 @@ npm i buejs
 ```
 ### Or
 ``` html
-<script scr="http://unpkg.com/buejs"></script>
+<script scr="//unpkg.com/buejs"></script>
 <!-- or -->
-<script scr="https://cdn.jsdelivr.net/npm/buejs"></script>
+<script scr="//cdn.jsdelivr.net/npm/buejs"></script>
 ```
 
 ## Usage
