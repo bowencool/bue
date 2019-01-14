@@ -13,11 +13,27 @@ npm i buejs
 ```
 
 ## Usage
+``` html
+<div id="app">
+	<div>
+		<h1>{{name}}</h1>
+		<input b-model="name" />
+	</div>
+	<button @click="reset">reset</button>
+</div>
+```
 ``` js
 new Bue({
-	el: "#app",
-	data: {
-		name: "bue"
-	}
+	el: '#app',
+	data() {
+		return {
+			name: 'hello, bue',
+		};
+	},
+	methods: {
+		reset() {
+			this.name = 'hello, bue';
+		},
+	},
 })
 ```
