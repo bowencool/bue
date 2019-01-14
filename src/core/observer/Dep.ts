@@ -7,16 +7,16 @@ export default class Dep {
 	// this is globally unique because there could be only one
 	// watcher being evaluated at any time.
 	static target: Watcher = null;
+	public id: number;
+	private watchers: Watcher[];
 
 	constructor() {
 		this.id = ++uid;
 		this.watchers = [];
 	}
 
-	private id: number;
-	private watchers: Watcher[];
-
 	addWatcher(watcher: Watcher): void {
+		// console.log('addWatcher: ', watcher, this);
 		this.watchers.push(watcher);
 	}
 
@@ -28,16 +28,16 @@ export default class Dep {
 	}
 
 	notify() {
-		console.log('TODO: dep.notify: ', this.watchers);
+		// console.log('dep.notify: ', this.watchers);
 		this.watchers.forEach(w => {
 			w.update();
 		});
 	}
-	// depend() {
-	// 	if (Dep.target) {
-	// 		Dep.target.addDep(this);
-	// 	}
-	// }
+	depend() {
+		if (Dep.target) {
+			Dep.target.addDep(this);
+		}
+	}
 }
 
 // const targetStack = [];

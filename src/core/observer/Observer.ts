@@ -25,7 +25,8 @@ export default class Observer {
 			enumerable: true,
 			configurable: false,
 			get() {
-				// todo
+				// 把 watcher 添加到 dep.watchers (通过watcher.addDep或dep.addWatcher), 这里拿不到 watcher 或者 不确定哪个 watcher, 所以才会有Dep.target
+				dep.depend();
 				return val;
 			},
 			set(newVal) {

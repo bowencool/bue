@@ -52,7 +52,8 @@ export function proxy(target: object, sourceKey: string, key: string): void {
 	});
 }
 
-export const getValue = (target: object, path: string): any => {
+export const getValue = (target?: object, path: string): any => {
+	if (!target) return;
 	if (path in target) {
 		return target[path];
 	}
