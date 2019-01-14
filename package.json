@@ -1,6 +1,6 @@
 {
 	"name": "buejs",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "",
 	"unpkg": "dist/bue.min.js",
 	"main": "dist/bue.js",

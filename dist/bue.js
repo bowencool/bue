@@ -314,10 +314,8 @@
 					Watcher.prototype.update = function() {
 						var value = this.get();
 						var oldVal = this.value;
-						if (value !== oldVal) {
-							this.value = value;
-							this.cb.call(this.bm, value, oldVal);
-						}
+						this.value = value;
+						this.cb.call(this.bm, value, oldVal);
 					};
 					Watcher.prototype.addDep = function(dep) {
 						if (!this.depIds.hasOwnProperty(dep.id)) {
@@ -359,12 +357,8 @@
 					},
 					model: function(node, bm, exp) {
 						this.bind(node, bm, exp, updaters.model);
-						var val = getValue(bm, exp);
 						var handler = function(e) {
 							var newValue = e.target.value;
-							if (val === newValue) {
-								return;
-							}
 							setValue(bm, exp, newValue);
 						};
 						node.addEventListener('input', handler);
