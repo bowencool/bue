@@ -1,25 +1,43 @@
 import Bue from '../index';
 import Watcher from '../observer/Watcher';
 import updaters from './updaters';
-import { findValue } from '../../utils';
+import { getValue, setValue } from '../../utils/index';
+
+enum KEYS {
+	text,
+	model,
+}
 
 export default {
 	text(node: Node, bm: Bue, exp: string) {
-		const updater = updaters.text;
-		updater(node, findValue(bm, exp));
 		this.bind(node, bm, exp, 'text');
 	},
-	bind(node: Node, bm: Bue, exp: string, dir: string) {
+	model(node: Node, bm: Bue, exp: string) {
+		// console.log('model', exp);
+		this.bind(node, bm, exp, 'model');
+		const val = getValue(bm, exp);
+		const handler = function(e) {
+			const newValue = e.target.value;
+			if (val === newValue) {
+				return;
+			}
+			setValue(bm, exp, newValue);
+		};
+		node.addEventListener('input', handler);
+		node.addEventListener('change', handler);
+	},
+	bind(node: Node, bm: Bue, exp: string, dir: KEYS) {
 		const updater: Function = updaters[dir];
-		new Watcher(bm, exp, function(value: string, oldValue?: string) {
+		updater(node, getValue(bm, exp));
+
+		new Watcher(bm, exp, function(value: any, oldValue?: any) {
 			updater && updater(node, value, oldValue);
 		});
 	},
-	eventHandler(node: Node, bm: Bue, exp: string, dir: string): void {
-		const eventType = exp;
+	eventHandler(node: Node, bm: Bue, eventName: string, dir: string): void {
 		const fn = bm.$options.methods && bm.$options.methods[dir];
-		if (eventType && fn) {
-			node.addEventListener(eventType, fn.bind(bm), false);
+		if (eventName && fn) {
+			node.addEventListener(eventName, fn.bind(bm), false);
 		}
 	},
 };

@@ -44,7 +44,8 @@ export default class Compiler {
 		Array.from(node.attributes).forEach(attr => {
 			if (/^b-(\w+)/.test(attr.name)) {
 				// TODO 指令处理
-				// node.removeAttribute(attr.name);
+				utils[RegExp.$1](node, this.$bm, attr.value);
+				node.removeAttribute(attr.name);
 			} else if (/^@(\w+)/.test(attr.name)) {
 				// 事件处理
 				utils.eventHandler(node, this.$bm, RegExp.$1, attr.value);
