@@ -148,6 +148,32 @@
 						},
 					});
 				}
+				var getValue = function(target, path) {
+					if (!target) return;
+					if (path in target) {
+						return target[path];
+					}
+					var val;
+					path.split('.').forEach(function(k) {
+						val = val[k];
+					});
+					return val;
+				};
+				var setValue = function(target, path, value) {
+					if (path in target) {
+						target[path] = value;
+						return;
+					}
+					var val;
+					path.split('.').forEach(function(k, i, arr) {
+						if (i < arr.length - 1) {
+							val = val[k];
+						} else {
+							val[k] = value;
+						}
+					});
+					return val;
+				};
 
 				// CONCATENATED MODULE: ./src/core/observer/Dep.ts
 				var uid = 0;
@@ -169,6 +195,11 @@
 						this.watchers.forEach(function(w) {
 							w.update();
 						});
+					};
+					Dep.prototype.depend = function() {
+						if (Dep.target) {
+							Dep.target.addDep(this);
+						}
 					};
 					Dep.target = null;
 					return Dep;
@@ -193,6 +224,7 @@
 							enumerable: true,
 							configurable: false,
 							get: function() {
+								dep.depend();
 								return val;
 							},
 							set: function(newVal) {
@@ -258,6 +290,157 @@
 					observe(data);
 				}
 
+				// CONCATENATED MODULE: ./src/core/observer/Watcher.ts
+
+				var parseGetter = function(exp) {
+					if (/[^\w.$]/.test(exp)) return;
+					return function(obj) {
+						return getValue(obj, exp);
+					};
+				};
+				var Watcher_Watcher = (function() {
+					function Watcher(bm, expOrFn, cb) {
+						this.depIds = {};
+						this.bm = bm;
+						this.expOrFn = expOrFn;
+						this.cb = cb;
+						if (typeof expOrFn === 'function') {
+							this.getter = expOrFn;
+						} else {
+							this.getter = parseGetter(expOrFn);
+						}
+						this.value = this.get();
+					}
+					Watcher.prototype.update = function() {
+						var value = this.get();
+						var oldVal = this.value;
+						if (value !== oldVal) {
+							this.value = value;
+							this.cb.call(this.bm, value, oldVal);
+						}
+					};
+					Watcher.prototype.addDep = function(dep) {
+						if (!this.depIds.hasOwnProperty(dep.id)) {
+							dep.addWatcher(this);
+							this.depIds[dep.id] = dep;
+						}
+					};
+					Watcher.prototype.get = function() {
+						observer_Dep.target = this;
+						var value = this.getter.call(this.bm, this.bm);
+						observer_Dep.target = null;
+						return value;
+					};
+					return Watcher;
+				})();
+				/* harmony default export */ var observer_Watcher = Watcher_Watcher;
+
+				// CONCATENATED MODULE: ./src/core/compiler/updaters.ts
+				/* harmony default export */ var updaters = {
+					text: function(node, value) {
+						if (value === void 0) {
+							value = '';
+						}
+						node.textContent = value;
+					},
+					model: function(node, value) {
+						if (value === void 0) {
+							value = '';
+						}
+						node.value = value;
+					},
+				};
+
+				// CONCATENATED MODULE: ./src/core/compiler/utils.ts
+
+				/* harmony default export */ var utils = {
+					text: function(node, bm, exp) {
+						this.bind(node, bm, exp, updaters.text);
+					},
+					model: function(node, bm, exp) {
+						this.bind(node, bm, exp, updaters.model);
+						var val = getValue(bm, exp);
+						var handler = function(e) {
+							var newValue = e.target.value;
+							if (val === newValue) {
+								return;
+							}
+							setValue(bm, exp, newValue);
+						};
+						node.addEventListener('input', handler);
+						node.addEventListener('change', handler);
+					},
+					bind: function(node, bm, exp, updater) {
+						updater && updater(node, getValue(bm, exp));
+						new observer_Watcher(bm, exp, function(value, oldValue) {
+							updater && updater(node, value, oldValue);
+						});
+					},
+					eventHandler: function(node, bm, eventName, dir) {
+						var fn = bm.$options.methods && bm.$options.methods[dir];
+						if (eventName && fn) {
+							node.addEventListener(eventName, fn.bind(bm), false);
+						}
+					},
+				};
+
+				// CONCATENATED MODULE: ./src/core/compiler/index.ts
+
+				var isElementNode = function(node) {
+					return node.nodeType == 1;
+				};
+				var isTextNode = function(node) {
+					return node.nodeType == 3;
+				};
+				var node2Fragment = function(node) {
+					var fragment = document.createDocumentFragment();
+					while (node.firstChild) {
+						fragment.appendChild(node.firstChild);
+					}
+					return fragment;
+				};
+				var compiler_Compiler = (function() {
+					function Compiler(el, bm) {
+						this.$el = bm.$el = isElementNode(el) ? el : document.querySelector(el);
+						this.$bm = bm;
+						if (this.$el) {
+							this.$fragment = node2Fragment(this.$el);
+							this.compileElement(this.$fragment);
+							this.$el.appendChild(this.$fragment);
+						}
+					}
+					Compiler.prototype.compileElement = function(el) {
+						var _this = this;
+						el.childNodes.forEach(function(node) {
+							if (isElementNode(node)) {
+								_this.compileNode(node);
+							} else if (isTextNode(node) && /{{\s*(.*)\s*}}/.test(node.textContent)) {
+								_this.compileText(node, RegExp.$1);
+							}
+							if (node.childNodes && node.childNodes.length) {
+								_this.compileElement(node);
+							}
+						});
+					};
+					Compiler.prototype.compileNode = function(node) {
+						var _this = this;
+						Array.from(node.attributes).forEach(function(attr) {
+							if (/^b-(\w+)/.test(attr.name)) {
+								utils[RegExp.$1](node, _this.$bm, attr.value);
+								node.removeAttribute(attr.name);
+							} else if (/^@(\w+)/.test(attr.name)) {
+								utils.eventHandler(node, _this.$bm, RegExp.$1, attr.value);
+								node.removeAttribute(attr.name);
+							}
+						});
+					};
+					Compiler.prototype.compileText = function(node, exp) {
+						utils.text(node, this.$bm, exp);
+					};
+					return Compiler;
+				})();
+				/* harmony default export */ var compiler = compiler_Compiler;
+
 				// CONCATENATED MODULE: ./src/core/index.ts
 
 				var core_uid = 0;
@@ -267,6 +450,7 @@
 						this._isBue = true;
 						this.$options = options;
 						initState(this);
+						this.$compiler = new compiler(options.el, this);
 					}
 					return Bue;
 				})();
