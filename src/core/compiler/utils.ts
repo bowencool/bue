@@ -11,12 +11,12 @@ export default {
 	model(node: Node, bm: Bue, exp: string) {
 		// console.log('model', exp);
 		this.bind(node, bm, exp, updaters.model);
-		const val = getValue(bm, exp);
+		// const val = getValue(bm, exp);
 		const handler = function(e: Event) {
 			const newValue = e.target.value;
-			if (val === newValue) {
-				return;
-			}
+			// if (val === newValue) {
+			// 	return;
+			// }
 			setValue(bm, exp, newValue);
 		};
 		node.addEventListener('input', handler);

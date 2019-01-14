@@ -33,13 +33,12 @@ export default class Watcher {
 	}
 
 	public update(): void {
-		// console.log('watcher.updated.');
 		var value = this.get();
 		var oldVal = this.value;
-		if (value !== oldVal) {
-			this.value = value;
-			this.cb.call(this.bm, value, oldVal);
-		}
+		// if (value !== oldVal) {
+		this.value = value;
+		this.cb.call(this.bm, value, oldVal);
+		// }
 	}
 
 	public addDep(dep: Dep) {
