@@ -1,13 +1,13 @@
-export interface ComputedOptions {
+type ComputedOptions = {
 	[name: string]:
 		| (() => any)
 		| {
 				get: () => any;
 				set: () => void;
 		  };
-}
+};
 
-export default interface InitOptions {
+type InitOptions = {
 	template?: string;
 	el: string | Node;
 	data: object | (() => object);
@@ -15,4 +15,8 @@ export default interface InitOptions {
 	methods?: {
 		[name: string]: () => void;
 	};
+};
+
+export default interface Bue {
+	constructor(option: InitOptions);
 }
