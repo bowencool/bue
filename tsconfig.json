@@ -4,8 +4,11 @@
 		"noImplicitAny": true,
 		"removeComments": true,
 		"preserveConstEnums": true,
-		"sourceMap": true
+		"sourceMap": true,
+		"declaration": true,
+		"typeRoots": ["./types"]
 	},
+	"locale": "zh-CN",
 	"include": ["src/**/*", "example/**/*"],
 	"exclude": ["node_modules", "**/*.spec.ts"]
 }
