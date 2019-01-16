@@ -1,6 +1,7 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.config.base');
+const DeclarationBundlerPlugin = require('declaration-bundler-webpack-plugin');
 
 module.exports = merge(baseConfig, {
 	mode: 'production',
@@ -17,4 +18,10 @@ module.exports = merge(baseConfig, {
 	stats: {
 		modules: false,
 	},
+	plugins: [
+		new DeclarationBundlerPlugin({
+			moduleName: 'Bue',
+			out: 'index.d.ts',
+		}),
+	],
 });

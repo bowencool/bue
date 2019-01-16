@@ -1320,6 +1320,11 @@ decamelize@^2.0.0:
   dependencies:
     xregexp "4.0.0"
 
+declaration-bundler-webpack-plugin@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/declaration-bundler-webpack-plugin/-/declaration-bundler-webpack-plugin-1.0.3.tgz#9fb5ae393c63ed4175e7b6de4b58bafde34f097a"
+  integrity sha1-n7WuOTxj7UF157beS1i6/eNPCXo=
+
 decode-uri-component@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
