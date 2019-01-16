@@ -5,8 +5,10 @@
 		"removeComments": true,
 		"preserveConstEnums": true,
 		"sourceMap": true,
-		"declaration": true
+		"declaration": true,
+		"typeRoots": ["./types"]
 	},
+	"locale": "zh-CN",
 	"include": ["src/**/*", "example/**/*"],
 	"exclude": ["node_modules", "**/*.spec.ts"]
 }

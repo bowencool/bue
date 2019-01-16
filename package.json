@@ -3,8 +3,14 @@
 	"version": "0.0.5",
 	"description": "",
 	"unpkg": "dist/bue.min.js",
+  "jsdelivr": "dist/bue.min.js",
 	"main": "dist/bue.js",
 	"typings": "dist/index.d.ts",
+	"files": [
+		"src",
+		"dist",
+		"types"
+	],
 	"scripts": {
 		"start": "npm run dev",
 		"dev": "webpack-dev-server --progress --config build/webpack.config.dev.js",

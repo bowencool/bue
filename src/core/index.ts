@@ -1,4 +1,3 @@
-import InitOptions from './interfaces';
 import { initState } from './instance/state';
 import Compiler from './compiler';
 
