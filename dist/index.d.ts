@@ -1,1 +1,3 @@
-declare module Bue {}
+declare module Bue
+{
+}
