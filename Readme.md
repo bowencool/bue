@@ -1,6 +1,12 @@
 # Bue
 > An MVVM framework, [Live Demo](https://bowencool.github.io/bue/)
 
+## Todos
+ - [x] 事件绑定
+ - [x] 双向绑定
+ - [x] 计算属性
+ - [ ] 监听数组变化
+
 ## Install
 ``` bash
 npm i buejs
@@ -44,8 +50,3 @@ new Bue({
 	},
 })
 ```
-## Todos
- - [x] 事件绑定
- - [x] 双向绑定
- - [x] 计算属性
- - [ ] 监听数组变化
