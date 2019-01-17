@@ -27,12 +27,20 @@ new Bue({
 	el: '#app',
 	data() {
 		return {
-			name: 'hello, bue',
+			name: INIT_NAME,
 		};
+	},
+	computed: {
+		msg() {
+			return this.name
+				.split('')
+				.reverse()
+				.join('');
+		},
 	},
 	methods: {
 		reset() {
-			this.name = 'hello, bue';
+			this.name = INIT_NAME;
 		},
 	},
 })
@@ -40,5 +48,5 @@ new Bue({
 ## Todos
  - [x] 事件绑定
  - [x] 双向绑定
- - [ ] 计算属性
+ - [x] 计算属性
  - [ ] 监听数组变化
