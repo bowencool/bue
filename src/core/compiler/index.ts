@@ -31,7 +31,7 @@ export default class Compiler {
 		el.childNodes.forEach(node => {
 			if (isElementNode(node)) {
 				this.compileNode(node);
-			} else if (isTextNode(node) && /{{\s*(.*)\s*}}/.test(node.textContent)) {
+			} else if (isTextNode(node) && /{{\s*(.*?)\s*}}/.test(node.textContent)) {
 				this.compileText(node, RegExp.$1);
 			}
 			if (node.childNodes && node.childNodes.length) {
