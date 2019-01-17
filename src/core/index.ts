@@ -3,7 +3,7 @@ import Compiler from './compiler';
 
 let uid: number = 0;
 export default class Bue {
-	constructor(options: InitOptions) {
+	constructor(options: BueConfiguration) {
 		this._uid = ++uid;
 		this._isBue = true;
 		this.$options = options;
@@ -13,7 +13,7 @@ export default class Bue {
 	public _uid: number;
 	public _isBue: boolean;
 	public _data: object;
-	public $options: InitOptions;
+	public $options: BueConfiguration;
 	public $compiler: Compiler;
 	public $el: Node;
 }
