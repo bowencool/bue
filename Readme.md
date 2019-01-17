@@ -50,3 +50,8 @@ new Bue({
 	},
 })
 ```
+
+## Particular Thanks
+
+- [DMQ](https://github.com/DMQ)
+- [liyanlong](https://github.com/liyanlong)
