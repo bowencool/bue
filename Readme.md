@@ -15,11 +15,18 @@ npm i buejs
 ## Usage
 ``` html
 <div id="app">
-	<div>
+	<fieldset>
+		<legend>b-model</legend>
 		<h1>{{name}}</h1>
 		<input b-model="name" />
-	</div>
-	<button @click="reset">reset</button>
+		<button @click="reset">reset</button>
+	</fieldset>
+
+	<fieldset>
+		<legend>computed</legend>
+		<h2>{{msg}}</h2>
+		<!-- <button>set computed</button> -->
+	</fieldset>
 </div>
 ```
 ``` js
