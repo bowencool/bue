@@ -7,7 +7,8 @@ methods.forEach((method: string) => {
 	Object.defineProperty(middleArrayPrototype, method, {
 		value() {
 			const result = original.apply(this, arguments);
-			console.log(method, this);
+			// console.log(method, this);
+			this.__ob__.dep.notify();
 			return result;
 		},
 	});

@@ -1,5 +1,5 @@
 import { initState, initComputed } from './instance/state';
-import Compiler from './compiler';
+import Compiler from './compiler/index';
 
 let uid: number = 0;
 export default class Bue {

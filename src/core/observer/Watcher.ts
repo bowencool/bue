@@ -1,6 +1,6 @@
 import Bue from '../index';
 import { getValue } from '../../utils/index';
-import Dep from './Dep';
+import Dep, { popTarget, pushTarget } from './Dep';
 
 const parseGetter = (exp: string): Function => {
 	if (/[^\w.$]/.test(exp)) return;
@@ -49,9 +49,9 @@ export default class Watcher {
 	}
 
 	private get() {
-		Dep.target = this;
+		pushTarget(this);
 		const value = this.getter.call(this.bm, this.bm);
-		Dep.target = null;
+		popTarget();
 		return value;
 	}
 }
