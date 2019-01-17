@@ -1,25 +1,25 @@
-import Bue from '../src/core';
+import Bue from '../src/core/index';
+
+const INIT_NAME: string = 'Hello,Bue!';
 
 window.bm = new Bue({
 	el: '#app',
-	// 	template: `<div>
-	// 	<h1>hello, {{name}}</h1>
-	// 	<input b-model="name" />
-	// 	<button @click="greet">greet</button>
-	// </div>`,
 	data() {
 		return {
-			name: 'hello, bue',
+			name: INIT_NAME,
 		};
 	},
-	// computed: {
-	// 	greeting() {
-	// 		return `Hello, ${this.name}!`;
-	// 	},
-	// },
+	computed: {
+		msg() {
+			return this.name
+				.split('')
+				.reverse()
+				.join('');
+		},
+	},
 	methods: {
 		reset() {
-			this.name = 'hello, bue';
+			this.name = INIT_NAME;
 		},
 	},
 });

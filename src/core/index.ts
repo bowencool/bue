@@ -1,4 +1,4 @@
-import { initState } from './instance/state';
+import { initState, initComputed } from './instance/state';
 import Compiler from './compiler';
 
 let uid: number = 0;
@@ -8,6 +8,7 @@ export default class Bue {
 		this._isBue = true;
 		this.$options = options;
 		initState(this);
+		initComputed(this);
 		this.$compiler = new Compiler(options.el, this);
 	}
 	public _uid: number;

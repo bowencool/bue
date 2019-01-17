@@ -1,6 +1,6 @@
-import Bue from '..';
-import { typeOf, hasOwn, warn, isReserved, proxy } from '../../utils';
-import { observe } from '../observer';
+import Bue from '../index';
+import { typeOf, hasOwn, warn, isReserved, proxy } from '../../utils/index';
+import { observe } from '../observer/index';
 
 export function initState(bm: Bue): void {
 	const { data } = bm.$options;
@@ -28,4 +28,24 @@ function initData(bm: Bue): void {
 		}
 	}
 	observe(data);
+}
+
+export function initComputed(bm: Bue) {
+	const computed = bm.$options.computed;
+	if (typeOf(computed) === 'object') {
+		Object.keys(computed).forEach(key => {
+			const opt = computed[key];
+			const isF = typeOf(opt) === 'function';
+			Object.defineProperty(bm, key, {
+				get: isF ? opt : opt.get.call(bm),
+				set: isF
+					? function() {
+							warn(`Avoiding modify the computed property "${key}" unless you provide an setter.`);
+					  }
+					: function() {
+							opt.set.apply(bm, arguments);
+					  },
+			});
+		});
+	}
 }
