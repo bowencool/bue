@@ -1,22 +1,25 @@
-type ComputedOptions = {
-	[name: string]:
-		| (() => any)
-		| {
-				get: () => any;
-				set: () => void;
-		  };
-};
+declare type ComputedOpt =
+	| (() => any)
+	| {
+			get: () => any;
+			set: () => void;
+	  };
 
-type InitOptions = {
-	template?: string;
+export interface BueConfiguration {
+	// template?: string;
 	el: string | Node;
 	data: object | (() => object);
-	computed?: ComputedOptions;
+	computed?: {
+		[name: string]: ComputedOpt;
+	};
 	methods?: {
 		[name: string]: () => void;
 	};
-};
+}
 
-export default interface Bue {
-	constructor(option: InitOptions);
+export default class Bue {
+	constructor(option: BueConfiguration);
+
+	$el: Node;
+	$options: object;
 }
