@@ -9,25 +9,40 @@
 	<!-- <script src="../dist/bue.js"></script> -->
 </head>
 <body>
-	<div id="app">
-		<div>
-			<h1>{{name}}</h1>
-			<input b-model="name" />
+		<div id="app">
+			<fieldset>
+				<legend>b-model</legend>
+				<h1>{{name}}</h1>
+				<input b-model="name" />
+				<button @click="reset">reset</button>
+			</fieldset>
+
+			<fieldset>
+				<legend>computed</legend>
+				<h2>{{msg}}</h2>
+				<!-- <button>set computed</button> -->
+			</fieldset>
 		</div>
-		<button @click="reset">reset</button>
-	</div>
 
 	<script>
 		new Bue({
 			el: '#app',
 			data() {
 				return {
-					name: 'hello, bue',
+					name: INIT_NAME,
 				};
+			},
+			computed: {
+				msg() {
+					return this.name
+						.split('')
+						.reverse()
+						.join('');
+				},
 			},
 			methods: {
 				reset() {
-					this.name = 'hello, bue';
+					this.name = INIT_NAME;
 				},
 			},
 		})
