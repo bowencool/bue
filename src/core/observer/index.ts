@@ -1,11 +1,24 @@
 import Observer from './Observer';
+import middleArrayPrototype from './array';
 
 /**
  * 观察一个目标/数据
  */
 export function observe(data: any): Observer {
+	// 过滤基本类型值
 	if (!data || typeof data !== 'object') {
 		return;
+	}
+
+	if (Array.isArray(data)) {
+		data.forEach(item => {
+			if ('__proto__' in {}) {
+				data.__proto__ = middleArrayPrototype;
+			} else {
+				// todo
+			}
+			observe(item);
+		});
 	}
 
 	// 已经观察过

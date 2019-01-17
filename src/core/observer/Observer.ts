@@ -2,16 +2,17 @@ import Dep from './Dep';
 import { observe } from './index';
 
 export default class Observer {
-	private data: object;
+	// private data: object;
 
 	constructor(data: object) {
-		this.data = data;
+		// this.data = data;
 		this.walk(data);
 	}
 
 	private walk(data: object) {
 		for (const key in data) {
 			this.defineReactive(data, key, data[key]);
+			observe(data[key]); // 递归
 		}
 	}
 
