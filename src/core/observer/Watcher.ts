@@ -5,10 +5,13 @@ import Dep, { popTarget, pushTarget } from './Dep';
 const parseGetter = (exp: string): Function => {
 	if (/[^\w.$]/.test(exp)) return;
 
-	return (obj: Object): any => getValue(obj, exp);
+	return (obj: object): any => getValue(obj, exp);
 };
 
+let uid = 0;
+
 export default class Watcher {
+	private id: number;
 	private bm: Bue;
 	private getter: Function;
 	private value: any;
@@ -19,7 +22,8 @@ export default class Watcher {
 	} = {};
 
 	constructor(bm: Bue, expOrFn: string | Function, cb: Function) {
-		// console.log('watcher created: ', expOrFn);
+		console.log('watcher ctor start. ', expOrFn);
+		this.id = uid++;
 		this.bm = bm;
 		this.expOrFn = expOrFn;
 		this.cb = cb;
@@ -30,15 +34,14 @@ export default class Watcher {
 			this.getter = parseGetter(expOrFn);
 		}
 		this.value = this.get();
+		console.log('watcher ctor end.');
 	}
 
 	public update(): void {
-		var value = this.get();
-		var oldVal = this.value;
-		// if (value !== oldVal) {
-		this.value = value;
-		this.cb.call(this.bm, value, oldVal);
-		// }
+		const newValue = this.get();
+		const oldVal = this.value;
+		this.value = newValue;
+		this.cb.call(this.bm, newValue, oldVal);
 	}
 
 	public addDep(dep: Dep) {

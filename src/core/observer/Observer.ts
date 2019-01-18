@@ -1,22 +1,31 @@
 import Dep from './Dep';
+import middleArrayPrototype from './array';
 import { observe } from './index';
 
 export default class Observer {
 	// private data: object;
-	public dep: Dep;
+	// public dep: Dep;
 
-	constructor(data: object) {
+	constructor(data: object | Array<any>) {
 		// this.data = data;
-		this.dep = new Dep();
-		console.log(data, Dep.target);
+		// this.dep = new Dep();
+		// console.log('constructor:', data, Dep.target);
 		// this.dep.depend();
 		this.walk(data);
 	}
 
-	private walk(data: object) {
-		for (const key in data) {
-			defineReactive(data, key, data[key]);
-			observe(data[key]); // 递归
+	private walk(data: object | Array<any>): void {
+		if (Array.isArray(data)) {
+			data.__proto__ = middleArrayPrototype;
+			data.forEach(item => {
+				// console.log('observe item: ', item);
+				observe(item);
+			});
+		} else {
+			for (const key in data) {
+				defineReactive(data, key, data[key]);
+				observe(data[key]);
+			}
 		}
 	}
 }
@@ -31,6 +40,7 @@ function defineReactive(data: object, key: string, val?: any) {
 		enumerable: true,
 		configurable: false,
 		get() {
+			console.log('getter: %s', key);
 			// 把 watcher 添加到 dep.watchers (通过watcher.addDep或dep.addWatcher)
 			dep.depend();
 			return val;
