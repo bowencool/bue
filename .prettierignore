@@ -1,6 +1,5 @@
 **/*.md
 **/*.svg
-**/*.html
 **/*.ejs
 dist/
 package.json
