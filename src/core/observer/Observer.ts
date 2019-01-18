@@ -1,39 +1,32 @@
 import Dep from './Dep';
-import middleArrayPrototype from './array';
 import { observe } from './index';
 
 export default class Observer {
 	// private data: object;
-	// public dep: Dep;
+	public dep: Dep;
 
 	constructor(data: object | Array<any>) {
 		// this.data = data;
 		// this.dep = new Dep();
-		// console.log('constructor:', data, Dep.target);
-		// this.dep.depend();
 		this.walk(data);
 	}
 
 	private walk(data: object | Array<any>): void {
-		if (Array.isArray(data)) {
-			data.__proto__ = middleArrayPrototype;
-			data.forEach(item => {
-				// console.log('observe item: ', item);
-				observe(item);
-			});
-		} else {
-			for (const key in data) {
-				defineReactive(data, key, data[key]);
-				observe(data[key]);
+		for (const key in data) {
+			const item = data[key];
+			const dep = defineReactive(data, key, item);
+			const childOb = observe(item);
+			if (Array.isArray(item)) {
+				childOb.dep = dep;
 			}
 		}
 	}
 }
 
 /**
- * 劫持数据
+ * 劫持一个属性
  */
-function defineReactive(data: object, key: string, val?: any) {
+export function defineReactive(data: object, key: string, val?: any): Dep {
 	const dep = new Dep();
 
 	Object.defineProperty(data, key, {
@@ -56,4 +49,6 @@ function defineReactive(data: object, key: string, val?: any) {
 			dep.notify();
 		},
 	});
+
+	return dep;
 }
