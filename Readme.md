@@ -9,14 +9,15 @@
  - [ ] 虚拟DOM（VNode）
 
 ## Install
+ - using npm
 ``` bash
 npm i buejs
 ```
-### Or
+ - using in browser
 ``` html
-<script scr="//unpkg.com/buejs"></script>
+<script scr="//unpkg.com/buejs@latest"></script>
 <!-- or -->
-<script scr="//cdn.jsdelivr.net/npm/buejs"></script>
+<script scr="//cdn.jsdelivr.net/npm/buejs@latest"></script>
 ```
 
 ## Usage
