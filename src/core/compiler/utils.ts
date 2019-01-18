@@ -14,9 +14,6 @@ export default {
 		// const val = getValue(bm, exp);
 		const handler = function(e: Event) {
 			const newValue = e.target.value;
-			// if (val === newValue) {
-			// 	return;
-			// }
 			setValue(bm, exp, newValue);
 		};
 		node.addEventListener('input', handler);

@@ -7,6 +7,7 @@ window.bm = new Bue({
 	data() {
 		return {
 			name: INIT_NAME,
+			list: ['a', 'b', 'c'],
 		};
 	},
 	computed: {
@@ -20,6 +21,9 @@ window.bm = new Bue({
 	methods: {
 		reset() {
 			this.name = INIT_NAME;
+		},
+		onArray() {
+			this.list.push('d');
 		},
 	},
 });
