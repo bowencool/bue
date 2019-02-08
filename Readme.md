@@ -1,4 +1,5 @@
 # Bue
+[![NPM version](https://img.shields.io/npm/v/buejs.svg)](https://npmjs.org/package/buejs)
 > An MVVM framework, [Live Demo](https://bowencool.github.io/bue/)
 
 ## Todos
