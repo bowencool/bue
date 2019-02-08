@@ -1,4 +1,5 @@
 // const { resolve } = require('./utils');
+const webpack = require('webpack');
 
 module.exports = {
 	resolve: {
@@ -24,4 +25,11 @@ module.exports = {
 			},
 		],
 	},
+	plugins: [
+		new webpack.BannerPlugin({
+			banner: () => `${process.env.npm_package_name} v${process.env.npm_package_version}
+Copyright (c) 2019 bowencool
+Released under the MIT License.`,
+		}),
+	],
 };
