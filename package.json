@@ -1,7 +1,7 @@
 {
 	"name": "buejs",
 	"version": "0.2.1",
-	"description": "a MVVM framework",
+	"description": "An MVVM framework",
 	"unpkg": "dist/bue.min.js",
 	"jsdelivr": "dist/bue.min.js",
 	"main": "dist/bue.js",
@@ -35,7 +35,7 @@
 		"mvvm", "bue", "buejs"
 	],
 	"author": "bowencool",
-	"license": "ISC",
+	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/bowencool/bue/issues"
 	},
