@@ -1,5 +1,5 @@
 /*!
- * buejs v0.2.0
+ * buejs v0.2.1
  * Copyright (c) 2019 bowencool
  * Released under the MIT License.
  */
