@@ -38,20 +38,6 @@ export function def(target: object, key: string, value: any, enumerable?: boolea
 	});
 }
 
-/**
- * proxy a key to target[sourceKey]
- */
-export function proxy(target: object, sourceKey: string, key: string): void {
-	Object.defineProperty(target, key, {
-		get() {
-			return this[sourceKey][key];
-		},
-		set(newValue) {
-			this[sourceKey][key] = newValue;
-		},
-	});
-}
-
 export const getValue = (target: object, path: string): any => {
 	// if (!target) return;
 	if (path in target) {

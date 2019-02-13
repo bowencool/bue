@@ -1,34 +1,29 @@
-import Observer from './Observer';
-import middleArrayPrototype from './array';
+import Dep from './Dep';
 
-/**
- * 观察一个目标/数据
- */
-export function observe(data: any): Observer {
+export function observe(obj: Target): Proxy | void {
 	// 过滤基本类型值
-	if (!data || typeof data !== 'object') {
+	if (!obj || typeof obj !== 'object') {
 		return;
 	}
-	// 已经观察过
-	if (data.__ob__) {
-		return data.__ob__;
-	}
+	const dep = new Dep();
 
-	if (Array.isArray(data)) {
-		data.__proto__ = middleArrayPrototype;
-		data.forEach(item => {
-			observe(item);
-		});
-	}
+	const handler = {
+		get(target: Target, key: string, receiver: Target) {
+			console.log(`get`, key);
+			dep.depend();
 
-	const __ob__ = new Observer(data);
-
-	Object.defineProperty(data, '__ob__', {
-		configurable: false,
-		writable: false,
-		enumerable: false,
-		value: __ob__,
-	});
-
-	return __ob__;
+			if (typeof target[key] === 'object' && target[key] !== null) {
+				return observe(target[key]);
+			}
+			return Reflect.get(target, key, receiver);
+		},
+		set(target: Target, key: string, value: any, receiver: Target) {
+			console.log('set: ', key, value);
+			// 监测到变化，通知所有订阅者
+			const wtf = Reflect.set(target, key, value, receiver);
+			dep.notify();
+			return wtf;
+		},
+	};
+	return new Proxy(obj, handler);
 }

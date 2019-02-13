@@ -13,7 +13,7 @@ export default class Bue {
 	}
 	public _uid: number;
 	public _isBue: boolean;
-	public _data: object;
+	public _proxy: object;
 	public $options: BueConfiguration;
 	public $compiler: Compiler;
 	public $el: Node;

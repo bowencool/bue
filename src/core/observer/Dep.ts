@@ -3,9 +3,6 @@ import Watcher from './Watcher';
 let uid = 0;
 
 export default class Dep {
-	// the current target watcher being evaluated.
-	// this is globally unique because there could be only one
-	// watcher being evaluated at any time.
 	static target: Watcher = null;
 	public id: number;
 	private watchers: Watcher[];
@@ -16,8 +13,8 @@ export default class Dep {
 	}
 
 	addWatcher(watcher: Watcher): void {
-		// console.log('addWatcher: ', watcher, this);
 		this.watchers.push(watcher);
+		console.log('addWatcher: ', watcher, this);
 	}
 
 	removeWatcher(watcher: Watcher): void {
@@ -28,7 +25,7 @@ export default class Dep {
 	}
 
 	notify() {
-		// console.log('dep.notify: ', this.watchers);
+		console.log('dep.notify: ', this.watchers);
 		this.watchers.forEach(w => {
 			w.update();
 		});
@@ -47,10 +44,10 @@ export function pushTarget(_target: Watcher) {
 		targetStack.push(Dep.target);
 	}
 	Dep.target = _target;
-	// console.log('target changed: ', Dep.target);
+	console.log('target changed: ', Dep.target);
 }
 
 export function popTarget() {
 	Dep.target = targetStack.pop();
-	// console.log('target changed: ', Dep.target);
+	console.log('target changed: ', Dep.target);
 }

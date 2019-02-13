@@ -22,7 +22,7 @@ export default class Watcher {
 	} = {};
 
 	constructor(bm: Bue, expOrFn: string | Function, cb: Function) {
-		// console.log('watcher ctor start. ', expOrFn);
+		console.log('watcher ctor start. ', expOrFn);
 		this.id = uid++;
 		this.bm = bm;
 		this.expOrFn = expOrFn;
@@ -34,7 +34,7 @@ export default class Watcher {
 			this.getter = parseGetter(expOrFn);
 		}
 		this.value = this.get();
-		// console.log('watcher ctor end.');
+		console.log('watcher ctor end.');
 	}
 
 	public update(): void {
