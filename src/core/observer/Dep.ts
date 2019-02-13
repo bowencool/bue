@@ -5,23 +5,20 @@ let uid = 0;
 export default class Dep {
 	static target: Watcher = null;
 	public id: number;
-	private watchers: Watcher[];
+	private watchers: Set<Watcher> = new Set();
+	private propertyName: string;
 
-	constructor() {
+	constructor(propertyName: string) {
 		this.id = ++uid;
-		this.watchers = [];
+		this.propertyName = propertyName;
 	}
 
 	addWatcher(watcher: Watcher): void {
-		this.watchers.push(watcher);
-		console.log('addWatcher: ', watcher, this);
+		this.watchers.add(watcher);
 	}
 
 	removeWatcher(watcher: Watcher): void {
-		const index = this.watchers.indexOf(watcher);
-		if (index > -1) {
-			this.watchers.splice(index, 1);
-		}
+		this.watchers.delete(watcher);
 	}
 
 	notify() {

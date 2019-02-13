@@ -13,7 +13,7 @@ function initData(bm: Bue): void {
 		const p = (bm._proxy = observe(data));
 		for (const key in data) {
 			if (methods && hasOwn(methods, key)) {
-				warn(`The data property "${key}" has already been declared as a method.`);
+				return warn(`The data property "${key}" has already been declared as a method.`);
 			}
 
 			if (isReserved(key)) {

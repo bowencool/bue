@@ -17,12 +17,10 @@ export default class Watcher {
 	private value: any;
 	private cb: Function;
 	private expOrFn: string | Function;
-	private depIds: {
-		[id: number]: Dep;
-	} = {};
+	private deps: Set<Dep> = new Set();
 
 	constructor(bm: Bue, expOrFn: string | Function, cb: Function) {
-		console.log('watcher ctor start. ', expOrFn);
+		console.log('creating watcher: ', expOrFn);
 		this.id = uid++;
 		this.bm = bm;
 		this.expOrFn = expOrFn;
@@ -34,7 +32,7 @@ export default class Watcher {
 			this.getter = parseGetter(expOrFn);
 		}
 		this.value = this.get();
-		console.log('watcher ctor end.');
+		console.log('watcher created.');
 	}
 
 	public update(): void {
@@ -44,11 +42,10 @@ export default class Watcher {
 		this.cb.call(this.bm, newValue, oldVal);
 	}
 
-	public addDep(dep: Dep) {
-		if (!this.depIds.hasOwnProperty(dep.id)) {
-			dep.addWatcher(this);
-			this.depIds[dep.id] = dep;
-		}
+	public addDep(dep: Dep): void {
+		dep.addWatcher(this);
+		this.deps.add(dep);
+		console.log('addDep:', dep, this);
 	}
 
 	private get() {
