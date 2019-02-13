@@ -9,7 +9,7 @@ export default class Dep {
 	private propertyName: string;
 
 	constructor(propertyName: string) {
-		this.id = ++uid;
+		this.id = uid++;
 		this.propertyName = propertyName;
 	}
 
@@ -22,7 +22,7 @@ export default class Dep {
 	}
 
 	notify() {
-		console.log('dep.notify: ', this.watchers);
+		console.log('dep.notify: ', this);
 		this.watchers.forEach(w => {
 			w.update();
 		});

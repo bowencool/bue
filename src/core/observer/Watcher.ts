@@ -40,6 +40,7 @@ export default class Watcher {
 		const oldVal = this.value;
 		this.value = newValue;
 		this.cb.call(this.bm, newValue, oldVal);
+		console.log('updated:', newValue, oldVal);
 	}
 
 	public addDep(dep: Dep): void {

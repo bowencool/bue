@@ -1,5 +1,5 @@
 import Bue from '../index';
-import { typeOf, hasOwn, warn, isReserved } from '../../utils/index';
+import { typeOf, hasOwn, warn, isReserved, isJson } from '../../utils/index';
 import { observe } from '../observer/index';
 
 export function initState(bm: Bue): void {
@@ -19,14 +19,20 @@ function initData(bm: Bue): void {
 			if (isReserved(key)) {
 				warn(`The data property "${key}" is a reserved key.`);
 			} else {
+				// const flag = isJson(data[key]);
+				// if () {
 				Object.defineProperty(bm, key, {
 					get() {
+						console.log('defineProperty get:', key);
 						return p[key];
 					},
 					set(v) {
 						p[key] = v;
 					},
 				});
+				// } else {
+
+				// }
 			}
 		}
 	}

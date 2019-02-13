@@ -1,6 +1,8 @@
 {
 	"compilerOptions": {
 		"module": "esnext",
+		"target": "esnext",
+		"lib": ["esnext", "dom"],
 		"noImplicitAny": true,
 		"removeComments": true,
 		"preserveConstEnums": true,
