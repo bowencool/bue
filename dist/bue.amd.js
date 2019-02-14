@@ -1,8 +1,4 @@
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global = global || self, global.Bue = factory());
-}(this, function () { 'use strict';
+define(function () { 'use strict';
 
 	function typeOf(wtf) {
 	    return Object.prototype.toString
@@ -365,4 +361,4 @@
 
 	return Bue;
 
-}));
+});

@@ -14,7 +14,8 @@
 	"scripts": {
 		"start": "npm run dev",
 		"dev": "webpack-dev-server --progress --config build/webpack.config.dev.js",
-		"build": "webpack --config build/webpack.config.prod.js && webpack --config build/webpack.config.doc.js",
+		"build": "rollup --config build/rollup.config.js",
+		"build:webpack": "webpack --config build/webpack.config.prod.js && webpack --config build/webpack.config.doc.js",
 		"prepublishOnly": "npm run build",
 		"prettier": "prettier --write ./src/**/* && prettier --write ./example/**/*",
 		"commitmsg": "commitlint -E GIT_PARAMS",
@@ -32,7 +33,9 @@
 		"url": "git+ssh://git@github.com/bowencool/bue.git"
 	},
 	"keywords": [
-		"mvvm", "bue", "buejs"
+		"mvvm",
+		"bue",
+		"buejs"
 	],
 	"author": "bowencool",
 	"license": "MIT",
@@ -47,6 +50,9 @@
 		"husky": "^0.14.3",
 		"lint-staged": "^7.2.0",
 		"prettier": "^1.13.7",
+		"rollup": "^1.1.2",
+		"rollup-plugin-typescript2": "^0.19.2",
+		"rollup-plugin-uglify": "^6.0.2",
 		"ts-loader": "^5.3.3",
 		"typescript": "^3.2.2",
 		"webpack": "^4.16.0",
