@@ -20,7 +20,7 @@ export default class Watcher {
 	private deps: Set<Dep> = new Set();
 
 	constructor(bm: Bue, expOrFn: string | Function, cb: Function) {
-		console.log('creating watcher: ', expOrFn);
+		console.group('creating watcher: ', expOrFn);
 		this.id = uid++;
 		this.bm = bm;
 		this.expOrFn = expOrFn;
@@ -32,15 +32,18 @@ export default class Watcher {
 			this.getter = parseGetter(expOrFn);
 		}
 		this.value = this.get();
-		console.log('watcher created.');
+		// console.log('watcher created.');
+		console.groupEnd();
 	}
 
 	public update(): void {
+		console.group('watcher.update');
 		const newValue = this.get();
 		const oldVal = this.value;
 		this.value = newValue;
 		this.cb.call(this.bm, newValue, oldVal);
 		console.log('updated:', newValue, oldVal);
+		console.groupEnd();
 	}
 
 	public addDep(dep: Dep): void {
@@ -50,9 +53,11 @@ export default class Watcher {
 	}
 
 	private get() {
+		console.group('watcher.get');
 		pushTarget(this);
 		const value = this.getter.call(this.bm, this.bm);
 		popTarget();
+		console.groupEnd();
 		return value;
 	}
 }

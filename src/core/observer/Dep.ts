@@ -41,10 +41,10 @@ export function pushTarget(_target: Watcher) {
 		targetStack.push(Dep.target);
 	}
 	Dep.target = _target;
-	console.log('target changed: ', Dep.target);
+	// console.log('target changed: ', Dep.target);
 }
 
 export function popTarget() {
 	Dep.target = targetStack.pop();
-	console.log('target changed: ', Dep.target);
+	// console.log('target changed: ', Dep.target);
 }

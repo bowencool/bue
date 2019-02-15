@@ -7,7 +7,7 @@ export function observe(obj: any): Proxy {
 	if (!obj || typeof obj !== 'object') {
 		return;
 	}
-	console.log('\nOBSERVING', obj);
+	console.log('OBSERVING', obj);
 	const deps: {
 		[name: string]: Dep;
 	} = {};
@@ -18,7 +18,8 @@ export function observe(obj: any): Proxy {
 	const handler = {
 		get(target: Target, key: string, receiver: Target) {
 			if (hasOwn(target, key)) {
-				console.log(`\nproxy get: `, key);
+				console.log('\n');
+				console.group(`proxy get: ${key}`);
 				if (!deps[key]) {
 					deps[key] = new Dep(key);
 				}
@@ -30,6 +31,7 @@ export function observe(obj: any): Proxy {
 					}
 					return caches[key];
 				}
+				console.groupEnd();
 			}
 			return Reflect.get(target, key, receiver);
 		},

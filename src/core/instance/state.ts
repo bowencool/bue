@@ -23,7 +23,7 @@ function initData(bm: Bue): void {
 				// if () {
 				Object.defineProperty(bm, key, {
 					get() {
-						console.log('defineProperty get:', key);
+						// console.log('defineProperty get:', key);
 						return p[key];
 					},
 					set(v) {
