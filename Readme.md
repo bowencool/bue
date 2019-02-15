@@ -22,9 +22,9 @@ import Bue from 'buejs'
 ```
  - 在浏览器中
 ``` html
-<script scr="//unpkg.com/buejs@latest"></script>
+<script scr="//unpkg.com/buejs"></script>
 <!-- or -->
-<script scr="//cdn.jsdelivr.net/npm/buejs@latest"></script>
+<script scr="//cdn.jsdelivr.net/npm/buejs"></script>
 ```
 
 ## 使用
