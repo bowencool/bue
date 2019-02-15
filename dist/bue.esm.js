@@ -1,3 +1,8 @@
+/*!
+* buejs v0.2.2
+* Copyright (c) 2019 bowencool
+* Released under the MIT License.
+*/
 function typeOf(wtf) {
     return Object.prototype.toString
         .call(wtf)
