@@ -1,5 +1,5 @@
 import tsPlugin from 'rollup-plugin-typescript';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 
 const name = 'Bue';
 const banner = `/*!
@@ -37,7 +37,7 @@ export default [
 		input: 'src/core/index.ts',
 		plugins: [
 			tsPlugin(),
-			uglify({
+			terser({
 				output: {
 					comments: /^!/,
 				},
