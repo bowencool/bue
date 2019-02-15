@@ -8,7 +8,7 @@
  - [x] 双向绑定
  - [x] 计算属性
  - [x] 观察数组变化
- - [x] Proxy代替defineProperty  (v1.0.0)
+ - [x] (v1.0.0)Proxy代替defineProperty
  - [ ] 虚拟DOM（VNode）
  - [ ] nextTick
 

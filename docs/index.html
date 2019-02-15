@@ -5,8 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>demo1</title>
-		<script src="//cdn.jsdelivr.net/npm/buejs@latest"></script>
-		<!-- <script src="../dist/bue.js"></script> -->
+		<!-- <script src="//cdn.jsdelivr.net/npm/buejs@latest"></script> -->
+		<script src="../dist/bue.min.js"></script>
 	</head>
 	<body>
 		<div id="app">
@@ -37,7 +37,7 @@
 				data() {
 					return {
 						name: INIT_NAME,
-						list: ['a', 'b', 'c'],
+						list: ['🌝', '🌝', '🌝'],
 					};
 				},
 				computed: {
@@ -53,7 +53,7 @@
 						this.name = INIT_NAME;
 					},
 					onArray() {
-						this.list.push('d');
+						this.list.push('🌝');
 					},
 				},
 			});
