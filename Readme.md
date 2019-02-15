@@ -1,6 +1,7 @@
 # Bue
 [![NPM version](https://img.shields.io/npm/v/buejs.svg)](https://npmjs.org/package/buejs)
-> An MVVM framework, [Live Demo](https://bowencool.github.io/bue/)
+> 自己写的`MVVM`框架, [Demo](https://bowencool.github.io/bue/)
+## 注意：此项目仅供学习使用，不适用于生产环境！
 
 ## Todos
  - [x] 事件绑定
@@ -9,20 +10,24 @@
  - [x] 观察数组变化
  - [ ] Proxy代替defineProperty
  - [ ] 虚拟DOM（VNode）
+ - [ ] nextTick
 
-## Install
- - using npm
+## 安装
+ - 使用 npm
 ``` bash
 npm i buejs
 ```
- - using in browser
+``` js
+import Bue from 'buejs'
+```
+ - 在浏览器中
 ``` html
 <script scr="//unpkg.com/buejs@latest"></script>
 <!-- or -->
 <script scr="//cdn.jsdelivr.net/npm/buejs@latest"></script>
 ```
 
-## Usage
+## 使用
 ``` html
 <div id="app">
 	<h1>{{ name }}</h1>
@@ -55,7 +60,7 @@ new Bue({
 })
 ```
 
-## Particular Thanks
+## 特别感谢
 
 - [DMQ](https://github.com/DMQ)
 - [liyanlong](https://github.com/liyanlong)
