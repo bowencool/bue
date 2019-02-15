@@ -2,7 +2,7 @@ import Dep from './Dep';
 import { hasOwn, isJson } from '../../utils/index';
 // const whiteList = ['__deps__'];
 
-export function observe(obj: any): Proxy {
+export function observe(obj: any, dep?: Dep): Proxy {
 	// 过滤基本类型值
 	if (!obj || typeof obj !== 'object') {
 		return;
@@ -21,17 +21,17 @@ export function observe(obj: any): Proxy {
 				console.log('\n');
 				console.group(`proxy get: ${key}`);
 				if (!deps[key]) {
-					deps[key] = new Dep(key);
+					deps[key] = dep || new Dep(key);
 				}
 				deps[key].depend();
+				console.groupEnd();
 
 				if (isJson(target[key])) {
 					if (!caches[key]) {
-						caches[key] = observe(target[key]);
+						caches[key] = observe(target[key], deps[key]);
 					}
 					return caches[key];
 				}
-				console.groupEnd();
 			}
 			return Reflect.get(target, key, receiver);
 		},
