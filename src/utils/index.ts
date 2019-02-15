@@ -47,7 +47,7 @@ export const getValue = (target: object, path: string): any => {
 	// if (!target) return;
 	if (path in target) {
 		const v = target[path];
-		console.warn(v);
+		// console.warn(v);
 		return v;
 	}
 	let val: any = target;

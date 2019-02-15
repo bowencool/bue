@@ -25,12 +25,10 @@ export function observe(obj: any): Proxy {
 				deps[key].depend();
 
 				if (isJson(target[key])) {
-					// return observe(target[key]);
-					const p = caches[key];
-					if (!p) {
+					if (!caches[key]) {
 						caches[key] = observe(target[key]);
 					}
-					return p;
+					return caches[key];
 				}
 			}
 			return Reflect.get(target, key, receiver);
