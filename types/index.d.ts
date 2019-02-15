@@ -1,3 +1,5 @@
+declare type Target = any[] | object;
+
 declare type ComputedOpt =
 	| (() => any)
 	| {

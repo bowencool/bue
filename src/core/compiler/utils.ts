@@ -21,7 +21,10 @@ export default {
 	},
 
 	bind(node: Node, bm: Bue, exp: string, updater?: Function) {
-		updater && updater(node, getValue(bm, exp));
+		console.group('compiler get initialValue:', exp);
+		const initialValue = getValue(bm, exp);
+		updater && updater(node, initialValue);
+		console.groupEnd();
 
 		new Watcher(bm, exp, function(value: any, oldValue?: any) {
 			updater && updater(node, value, oldValue);

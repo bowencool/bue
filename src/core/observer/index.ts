@@ -1,34 +1,47 @@
-import Observer from './Observer';
-import middleArrayPrototype from './array';
+import Dep from './Dep';
+import { hasOwn, isJson } from '../../utils/index';
+// const whiteList = ['__deps__'];
 
-/**
- * 观察一个目标/数据
- */
-export function observe(data: any): Observer {
+export function observe(obj: any, dep?: Dep): Proxy {
 	// 过滤基本类型值
-	if (!data || typeof data !== 'object') {
+	if (!obj || typeof obj !== 'object') {
 		return;
 	}
-	// 已经观察过
-	if (data.__ob__) {
-		return data.__ob__;
-	}
+	console.log('OBSERVING', obj);
+	const deps: {
+		[name: string]: Dep;
+	} = {};
+	const caches: {
+		[name: string]: Proxy;
+	} = {};
 
-	if (Array.isArray(data)) {
-		data.__proto__ = middleArrayPrototype;
-		data.forEach(item => {
-			observe(item);
-		});
-	}
+	const handler = {
+		get(target: Target, key: string, receiver: Target) {
+			if (hasOwn(target, key)) {
+				console.log('\n');
+				console.group(`proxy get: ${key}`);
+				if (!deps[key]) {
+					deps[key] = dep || new Dep(key);
+				}
+				deps[key].depend();
+				console.groupEnd();
 
-	const __ob__ = new Observer(data);
-
-	Object.defineProperty(data, '__ob__', {
-		configurable: false,
-		writable: false,
-		enumerable: false,
-		value: __ob__,
-	});
-
-	return __ob__;
+				if (isJson(target[key])) {
+					if (!caches[key]) {
+						caches[key] = observe(target[key], deps[key]);
+					}
+					return caches[key];
+				}
+			}
+			return Reflect.get(target, key, receiver);
+		},
+		set(target: Target, key: string, value: any, receiver: Target) {
+			console.log('\nset: ', key, value);
+			const wtf = Reflect.set(target, key, value, receiver);
+			let dep = deps[key];
+			dep && dep.notify();
+			return wtf;
+		},
+	};
+	return new Proxy(obj, handler);
 }

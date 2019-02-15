@@ -1,13 +1,13 @@
 import Bue from '../src/core/index';
 
-const INIT_NAME: string = 'Hello,Bue!';
+const INIT_NAME: string = 'hello';
 
 window.bm = new Bue({
 	el: '#app',
 	data() {
 		return {
 			name: INIT_NAME,
-			list: ['a', 'b', 'c'],
+			list: ['🌝', '🌝', '🌝'],
 		};
 	},
 	computed: {
@@ -23,7 +23,7 @@ window.bm = new Bue({
 			this.name = INIT_NAME;
 		},
 		onArray() {
-			this.list.push('d');
+			this.list.push('🌝');
 		},
 	},
 });

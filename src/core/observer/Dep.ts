@@ -3,32 +3,26 @@ import Watcher from './Watcher';
 let uid = 0;
 
 export default class Dep {
-	// the current target watcher being evaluated.
-	// this is globally unique because there could be only one
-	// watcher being evaluated at any time.
 	static target: Watcher = null;
 	public id: number;
-	private watchers: Watcher[];
+	private watchers: Set<Watcher> = new Set();
+	private propertyName: string;
 
-	constructor() {
-		this.id = ++uid;
-		this.watchers = [];
+	constructor(propertyName: string) {
+		this.id = uid++;
+		this.propertyName = propertyName;
 	}
 
 	addWatcher(watcher: Watcher): void {
-		// console.log('addWatcher: ', watcher, this);
-		this.watchers.push(watcher);
+		this.watchers.add(watcher);
 	}
 
 	removeWatcher(watcher: Watcher): void {
-		const index = this.watchers.indexOf(watcher);
-		if (index > -1) {
-			this.watchers.splice(index, 1);
-		}
+		this.watchers.delete(watcher);
 	}
 
 	notify() {
-		// console.log('dep.notify: ', this.watchers);
+		console.log('dep.notify: ', this);
 		this.watchers.forEach(w => {
 			w.update();
 		});

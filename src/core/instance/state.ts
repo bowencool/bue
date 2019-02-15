@@ -1,33 +1,41 @@
 import Bue from '../index';
-import { typeOf, hasOwn, warn, isReserved, proxy } from '../../utils/index';
+import { typeOf, hasOwn, warn, isReserved, isJson } from '../../utils/index';
 import { observe } from '../observer/index';
 
 export function initState(bm: Bue): void {
-	const { data } = bm.$options;
-	if (data) {
-		initData(bm);
-	} else {
-		observe((bm._data = {}));
-	}
+	initData(bm);
 }
 
 function initData(bm: Bue): void {
 	let { data, methods } = bm.$options;
-	data = bm._data = typeof data === 'function' ? data.call(bm) : data;
+	data = (typeof data === 'function' ? data.call(bm) : data) || {};
 	if (typeOf(data) === 'object') {
+		const p = (bm._proxy = observe(data));
 		for (const key in data) {
 			if (methods && hasOwn(methods, key)) {
-				warn(`The method "${key}" has already been declared as a data property.`);
+				return warn(`The data property "${key}" has already been declared as a method.`);
 			}
 
 			if (isReserved(key)) {
 				warn(`The data property "${key}" is a reserved key.`);
 			} else {
-				proxy(bm, '_data', key);
+				// const flag = isJson(data[key]);
+				// if () {
+				Object.defineProperty(bm, key, {
+					get() {
+						// console.log('defineProperty get:', key);
+						return p[key];
+					},
+					set(v) {
+						p[key] = v;
+					},
+				});
+				// } else {
+
+				// }
 			}
 		}
 	}
-	observe(data);
 }
 
 export function initComputed(bm: Bue) {

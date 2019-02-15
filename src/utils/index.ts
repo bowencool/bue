@@ -5,6 +5,11 @@ export function typeOf(wtf: any): string {
 		.toLowerCase();
 }
 
+export function isJson(wtf: any): boolean {
+	const type = typeOf(wtf);
+	return type === 'object' || type === 'array';
+}
+
 export function warn(msg: string): void {
 	if (process.env.NODE_ENV !== 'production') {
 		console.warn(`[Bue Warn]: ${msg}`);
@@ -38,24 +43,12 @@ export function def(target: object, key: string, value: any, enumerable?: boolea
 	});
 }
 
-/**
- * proxy a key to target[sourceKey]
- */
-export function proxy(target: object, sourceKey: string, key: string): void {
-	Object.defineProperty(target, key, {
-		get() {
-			return this[sourceKey][key];
-		},
-		set(newValue) {
-			this[sourceKey][key] = newValue;
-		},
-	});
-}
-
 export const getValue = (target: object, path: string): any => {
 	// if (!target) return;
 	if (path in target) {
-		return target[path];
+		const v = target[path];
+		// console.warn(v);
+		return v;
 	}
 	let val: any = target;
 	path.split('.').forEach(k => {

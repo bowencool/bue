@@ -1,6 +1,8 @@
 {
 	"compilerOptions": {
-		"module": "es2015",
+		"module": "esnext",
+		"target": "esnext",
+		"lib": ["esnext", "dom"],
 		"noImplicitAny": true,
 		"removeComments": true,
 		"preserveConstEnums": true,
