@@ -1,5 +1,5 @@
 import Bue from '../index';
-import Watcher from '../observer/Watcher';
+import Watcher from '../observe/Watcher';
 import updaters from './updaters';
 import { getValue, setValue } from '../../utils/index';
 
