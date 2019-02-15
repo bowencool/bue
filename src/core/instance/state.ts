@@ -1,6 +1,6 @@
 import Bue from '../index';
 import { typeOf, hasOwn, warn, isReserved, isJson } from '../../utils/index';
-import { observe } from '../observe/index';
+import { observe } from '../observer/index';
 
 export function initState(bm: Bue): void {
 	initData(bm);

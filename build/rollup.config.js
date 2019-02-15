@@ -10,7 +10,7 @@ const banner = `/*!
 
 export default [
 	{
-		input: 'src/index.ts',
+		input: 'src/core/index.ts',
 		plugins: [tsPlugin()],
 		output: [
 			{
@@ -34,7 +34,7 @@ export default [
 		],
 	},
 	{
-		input: 'src/index.ts',
+		input: 'src/core/index.ts',
 		plugins: [
 			tsPlugin(),
 			terser({

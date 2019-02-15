@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = {
 	resolve: {
 		// alias: {
-		// 	buejs: '../src/index.ts',
+		// 	buejs: '../src/core/index.ts',
 		// },
 		extensions: ['.ts', '.js', '.json'],
 	},

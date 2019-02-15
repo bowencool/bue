@@ -1,4 +1,4 @@
-import Bue from '../src/index';
+import Bue from '../src/core/index';
 
 const INIT_NAME: string = 'hello';
 
