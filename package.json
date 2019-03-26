@@ -2,9 +2,10 @@
 	"name": "buejs",
 	"version": "1.0.0",
 	"description": "An MVVM framework",
+	"main": "dist/bue.js",
+	"module": "dist/bue.esm.js",
 	"unpkg": "dist/bue.min.js",
 	"jsdelivr": "dist/bue.min.js",
-	"main": "dist/bue.js",
 	"types": "types/index.d.ts",
 	"files": [
 		"src",
