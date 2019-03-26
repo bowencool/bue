@@ -1,8 +1,8 @@
 import Bue from '../index';
 import utils from './utils';
 
-const isElementNode = (node: any): boolean => node.nodeType == 1;
-const isTextNode = (node: any): boolean => node.nodeType == 3;
+const isElementNode = (node: any): boolean => node.nodeType === 1;
+const isTextNode = (node: any): boolean => node.nodeType === 3;
 
 const node2Fragment = (node: Node): DocumentFragment => {
 	const fragment = document.createDocumentFragment();
