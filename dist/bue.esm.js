@@ -1,5 +1,5 @@
 /*!
-* buejs v1.0.0
+* buejs v1.0.1
 * Copyright (c) 2019 bowencool
 * Released under the MIT License.
 */
@@ -261,8 +261,8 @@ var utils = {
     },
 };
 
-const isElementNode = (node) => node.nodeType == 1;
-const isTextNode = (node) => node.nodeType == 3;
+const isElementNode = (node) => node.nodeType === 1;
+const isTextNode = (node) => node.nodeType === 3;
 const node2Fragment = (node) => {
     const fragment = document.createDocumentFragment();
     while (node.firstChild) {
