@@ -45,7 +45,7 @@ export function initComputed(bm: Bue) {
 			const opt = computed[key];
 			const isF = typeOf(opt) === 'function';
 			Object.defineProperty(bm, key, {
-				get: isF ? opt : opt.get.call(bm),
+				get: isF ? opt : opt.get.bind(bm),
 				set: isF
 					? function() {
 							warn(`Avoiding modify the computed property "${key}" unless you provide an setter.`);
