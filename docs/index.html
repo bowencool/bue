@@ -23,9 +23,12 @@
 			</fieldset>
 
 			<fieldset>
-				<legend>array</legend>
+				<legend>
+					array&lt;<span>{{ length }}</span
+					>&gt;
+				</legend>
 				<p>{{ list }}</p>
-				<button @click="onArray">click</button>
+				<button @click="onArrayPush">push</button> <button @click="onArrayPop">pop</button>
 			</fieldset>
 		</div>
 
@@ -47,13 +50,21 @@
 							.reverse()
 							.join('');
 					},
+					length: {
+						get() {
+							return this.list.length;
+						},
+					},
 				},
 				methods: {
 					reset() {
 						this.name = INIT_NAME;
 					},
-					onArray() {
+					onArrayPush() {
 						this.list.push('🌝');
+					},
+					onArrayPop() {
+						this.list.pop();
 					},
 				},
 			});
