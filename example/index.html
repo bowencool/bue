@@ -22,9 +22,10 @@
 		</fieldset>
 
 		<fieldset>
-			<legend>array</legend>
+			<legend>array&lt;<span>{{ length }}</span>&gt;</legend>
 			<p>{{ list }}</p>
-			<button @click="onArray">push</button>
+			<button @click="onArrayPush">push</button>
+			<button @click="onArrayPop">pop</button>
 		</fieldset>
 
 	</div>

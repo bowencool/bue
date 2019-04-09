@@ -17,13 +17,21 @@ window.bm = new Bue({
 				.reverse()
 				.join('');
 		},
+		length: {
+			get() {
+				return this.list.length;
+			},
+		},
 	},
 	methods: {
 		reset() {
 			this.name = INIT_NAME;
 		},
-		onArray() {
+		onArrayPush() {
 			this.list.push('🌝');
+		},
+		onArrayPop() {
+			this.list.pop();
 		},
 	},
 });
