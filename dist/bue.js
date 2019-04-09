@@ -1,5 +1,5 @@
 /*!
-* buejs v1.0.1
+* buejs v1.0.2
 * Copyright (c) 2019 bowencool
 * Released under the MIT License.
 */
@@ -168,7 +168,7 @@
 	            const opt = computed[key];
 	            const isF = typeOf(opt) === 'function';
 	            Object.defineProperty(bm, key, {
-	                get: isF ? opt : opt.get.call(bm),
+	                get: isF ? opt : opt.get.bind(bm),
 	                set: isF
 	                    ? function () {
 	                        warn(`Avoiding modify the computed property "${key}" unless you provide an setter.`);
