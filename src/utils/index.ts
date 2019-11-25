@@ -66,7 +66,7 @@ export const setValue = (target: object, path: string, value: any): any => {
 		target[path] = value;
 		return;
 	}
-	let val: any;
+	let val: any = target;
 	path.split('.').forEach((k, i, arr) => {
 		if (i < arr.length - 1) {
 			val = val[k];
