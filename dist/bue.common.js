@@ -1,5 +1,5 @@
 /*!
-* buejs v1.0.2
+* buejs v1.0.3
 * Copyright (c) 2019 bowencool
 * Released under the MIT License.
 */
@@ -43,7 +43,7 @@ const setValue = (target, path, value) => {
         target[path] = value;
         return;
     }
-    let val;
+    let val = target;
     path.split('.').forEach((k, i, arr) => {
         if (i < arr.length - 1) {
             val = val[k];

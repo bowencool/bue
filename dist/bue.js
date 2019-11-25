@@ -1,5 +1,5 @@
 /*!
-* buejs v1.0.2
+* buejs v1.0.3
 * Copyright (c) 2019 bowencool
 * Released under the MIT License.
 */
@@ -7,7 +7,7 @@
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
 	(global = global || self, global.Bue = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
 	function typeOf(wtf) {
 	    return Object.prototype.toString
@@ -47,7 +47,7 @@
 	        target[path] = value;
 	        return;
 	    }
-	    let val;
+	    let val = target;
 	    path.split('.').forEach((k, i, arr) => {
 	        if (i < arr.length - 1) {
 	            val = val[k];
@@ -330,4 +330,4 @@
 
 	return Bue;
 
-}));
+})));
