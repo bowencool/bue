@@ -12,7 +12,7 @@ export default {
 		// console.log('model', exp);
 		this.bind(node, bm, exp, updaters.model);
 		// const val = getValue(bm, exp);
-		const handler = function(e: Event) {
+		const handler = function(e: InputEvent) {
 			const newValue = e.target.value;
 			setValue(bm, exp, newValue);
 		};

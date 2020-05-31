@@ -19,20 +19,14 @@ function initData(bm: Bue): void {
 			if (isReserved(key)) {
 				warn(`The data property "${key}" is a reserved key.`);
 			} else {
-				// const flag = isJson(data[key]);
-				// if () {
 				Object.defineProperty(bm, key, {
 					get() {
-						// console.log('defineProperty get:', key);
 						return p[key];
 					},
 					set(v) {
 						p[key] = v;
 					},
 				});
-				// } else {
-
-				// }
 			}
 		}
 	}

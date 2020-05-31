@@ -4,11 +4,11 @@
 		"target": "esnext",
 		"lib": ["esnext", "dom"],
 		"noImplicitAny": true,
+		"noImplicitThis": true,
 		"removeComments": true,
 		"preserveConstEnums": true,
 		"sourceMap": true,
-		"declaration": true,
-		"typeRoots": ["./types"]
+		"declaration": true
 	},
 	"locale": "zh-CN",
 	"include": ["src/**/*", "example/**/*"],

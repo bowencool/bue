@@ -1,9 +1,10 @@
 import { initState, initComputed } from './instance/state';
 import Compiler from './compiler/index';
+import { BueOptions } from '../global';
 
 let uid: number = 0;
 export default class Bue {
-	constructor(options: BueConfiguration) {
+	constructor(options: BueOptions) {
 		this._uid = ++uid;
 		this._isBue = true;
 		this.$options = options;
@@ -14,7 +15,7 @@ export default class Bue {
 	public _uid: number;
 	public _isBue: boolean;
 	public _proxy: object;
-	public $options: BueConfiguration;
+	public $options: BueOptions;
 	public $compiler: Compiler;
 	public $el: Node;
 }

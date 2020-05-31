@@ -1,27 +1,8 @@
-declare type Target = any[] | object;
-
-declare type ComputedOpt =
-	| (() => any)
-	| {
-			get: () => any;
-			set: () => void;
-	  };
-
-export interface BueConfiguration {
-	// template?: string;
-	el: string | Node;
-	data: object | (() => object);
-	computed?: {
-		[name: string]: ComputedOpt;
-	};
-	methods?: {
-		[name: string]: () => void;
-	};
-}
+import { BueOptions } from '../src/global';
 
 export default class Bue {
-	constructor(option: BueConfiguration);
+	constructor(option: BueOptions);
 
 	$el: Node;
-	$options: object;
+	$options: BueOptions;
 }
