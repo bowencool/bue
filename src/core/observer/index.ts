@@ -1,8 +1,8 @@
 import Dep from './Dep';
 import { hasOwn, isJson } from '../../utils/index';
-// const whiteList = ['__deps__'];
+import { Target } from '../../global';
 
-export function observe(obj: any, dep?: Dep): Proxy {
+export function observe(obj: any, dep?: Dep): typeof obj {
 	// 过滤基本类型值
 	if (!obj || typeof obj !== 'object') {
 		return;
@@ -12,7 +12,7 @@ export function observe(obj: any, dep?: Dep): Proxy {
 		[name: string]: Dep;
 	} = {};
 	const caches: {
-		[name: string]: Proxy;
+		[name: string]: Target;
 	} = {};
 
 	const handler = {
@@ -26,9 +26,11 @@ export function observe(obj: any, dep?: Dep): Proxy {
 				deps[key].depend();
 				console.groupEnd();
 
-				if (isJson(target[key])) {
+				const child: any = target[key];
+
+				if (isJson(child)) {
 					if (!caches[key]) {
-						caches[key] = observe(target[key], deps[key]);
+						caches[key] = observe(child, deps[key]);
 					}
 					return caches[key];
 				}

@@ -1,3 +1,5 @@
+import { kvobject } from '../global';
+
 export function typeOf(wtf: any): string {
 	return Object.prototype.toString
 		.call(wtf)
@@ -43,25 +45,19 @@ export function def(target: object, key: string, value: any, enumerable?: boolea
 	});
 }
 
-export const getValue = (target: object, path: string): any => {
-	// if (!target) return;
+export const getValue = (target: kvobject, path: string): any => {
 	if (path in target) {
-		const v = target[path];
-		// console.warn(v);
+		const v: any = target[path];
 		return v;
 	}
 	let val: any = target;
 	path.split('.').forEach(k => {
-		// if (i === 0 ) {
-		// 	val = target[k];
-		// } else {
 		val = val[k];
-		// }
 	});
 	return val;
 };
 
-export const setValue = (target: object, path: string, value: any): any => {
+export const setValue = (target: kvobject, path: string, value: any): any => {
 	if (path in target) {
 		target[path] = value;
 		return;
