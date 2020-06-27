@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"module": "esnext",
-		"target": "esnext",
+		"target": "es2018",
 		"lib": ["esnext", "dom"],
 		"noImplicitAny": true,
 		"noImplicitThis": true,
@@ -11,6 +11,6 @@
 		"declaration": true
 	},
 	"locale": "zh-CN",
-	"include": ["src/**/*", "example/**/*"],
-	"exclude": ["node_modules", "**/*.spec.ts"]
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "**/*.spec.ts", "example/**/*"]
 }

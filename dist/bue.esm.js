@@ -107,9 +107,10 @@ function observe(obj, dep) {
                 }
                 deps[key].depend();
                 console.groupEnd();
-                if (isJson(target[key])) {
+                const child = target[key];
+                if (isJson(child)) {
                     if (!caches[key]) {
-                        caches[key] = observe(target[key], deps[key]);
+                        caches[key] = observe(child, deps[key]);
                     }
                     return caches[key];
                 }
@@ -160,17 +161,25 @@ function initComputed(bm) {
     if (typeOf(computed) === 'object') {
         Object.keys(computed).forEach(key => {
             const opt = computed[key];
-            const isF = typeOf(opt) === 'function';
-            Object.defineProperty(bm, key, {
-                get: isF ? opt : opt.get.bind(bm),
-                set: isF
-                    ? function () {
+            let descripter = {};
+            if (typeof opt === 'function') {
+                descripter = {
+                    get: opt,
+                    set: function () {
                         warn(`Avoiding modify the computed property "${key}" unless you provide an setter.`);
-                    }
-                    : function () {
-                        opt.set.apply(bm, arguments);
                     },
-            });
+                };
+            }
+            else {
+                descripter = {
+                    get: opt.get.bind(bm),
+                    set: function () {
+                        var _a;
+                        (_a = opt.set) === null || _a === void 0 ? void 0 : _a.apply(bm, arguments);
+                    },
+                };
+            }
+            Object.defineProperty(bm, key, descripter);
         });
     }
 }
@@ -231,7 +240,8 @@ var updaters = {
     },
 };
 
-var utils = {
+const DirectiveNames = ['bind'];
+const utils = {
     text(node, bm, exp) {
         this.bind(node, bm, exp, updaters.text);
     },
@@ -272,7 +282,14 @@ const node2Fragment = (node) => {
 };
 class Compiler {
     constructor(el, bm) {
-        this.$el = bm.$el = isElementNode(el) ? el : document.querySelector(el);
+        let $el;
+        if (typeof el === 'string') {
+            $el = document.querySelector(el);
+        }
+        else {
+            $el = el;
+        }
+        this.$el = bm.$el = $el;
         this.$bm = bm;
         if (this.$el) {
             this.$fragment = node2Fragment(this.$el);
@@ -281,7 +298,7 @@ class Compiler {
         }
     }
     compileElement(el) {
-        el.childNodes.forEach(node => {
+        el.childNodes.forEach((node) => {
             if (isElementNode(node)) {
                 this.compileNode(node);
             }
@@ -296,8 +313,10 @@ class Compiler {
     compileNode(node) {
         Array.from(node.attributes).forEach(attr => {
             if (/^b-(\w+)/.test(attr.name)) {
-                utils[RegExp.$1](node, this.$bm, attr.value);
-                node.removeAttribute(attr.name);
+                if (DirectiveNames.includes(RegExp.$1)) {
+                    utils[(RegExp.$1)](node, this.$bm, attr.value);
+                    node.removeAttribute(attr.name);
+                }
             }
             else if (/^@(\w+)/.test(attr.name)) {
                 utils.eventHandler(node, this.$bm, RegExp.$1, attr.value);

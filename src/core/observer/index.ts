@@ -8,12 +8,8 @@ export function observe(obj: any, dep?: Dep): typeof obj {
 		return;
 	}
 	console.log('OBSERVING', obj);
-	const deps: {
-		[name: string]: Dep;
-	} = {};
-	const caches: {
-		[name: string]: Target;
-	} = {};
+	const deps: Record<string, Dep> = {};
+	const caches: Record<string, Target> = {};
 
 	const handler = {
 		get(target: Target, key: string, receiver: Target) {

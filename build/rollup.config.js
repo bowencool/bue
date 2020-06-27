@@ -1,4 +1,4 @@
-import tsPlugin from 'rollup-plugin-typescript';
+import tsPlugin from '@rollup/plugin-typescript';
 import { terser } from 'rollup-plugin-terser';
 
 const name = 'Bue';
@@ -17,19 +17,19 @@ export default [
 				format: 'umd',
 				banner,
 				name,
-				file: 'dist/bue.js',
+				file: process.env.npm_package_main,
 			},
 			{
 				format: 'cjs',
 				banner,
 				name,
-				file: 'dist/bue.common.js',
+				file: process.env.npm_package_common,
 			},
 			{
 				format: 'esm',
 				banner,
 				name,
-				file: 'dist/bue.esm.js',
+				file: process.env.npm_package_module,
 			},
 		],
 	},
@@ -47,7 +47,7 @@ export default [
 			format: 'umd',
 			banner,
 			name,
-			file: 'dist/bue.min.js',
+			file: process.env.npm_package_unpkg,
 		},
 	},
 ];

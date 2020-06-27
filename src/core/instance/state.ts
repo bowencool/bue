@@ -37,17 +37,23 @@ export function initComputed(bm: Bue) {
 	if (typeOf(computed) === 'object') {
 		Object.keys(computed).forEach(key => {
 			const opt = computed[key];
-			const isF = typeOf(opt) === 'function';
-			Object.defineProperty(bm, key, {
-				get: isF ? opt : opt.get.bind(bm),
-				set: isF
-					? function() {
-							warn(`Avoiding modify the computed property "${key}" unless you provide an setter.`);
-					  }
-					: function() {
-							opt.set.apply(bm, arguments);
-					  },
-			});
+			let descripter: object = {};
+			if (typeof opt === 'function') {
+				descripter = {
+					get: opt,
+					set: function() {
+						warn(`Avoiding modify the computed property "${key}" unless you provide an setter.`);
+					},
+				};
+			} else {
+				descripter = {
+					get: opt.get.bind(bm),
+					set: function() {
+						opt.set?.apply(bm, arguments);
+					},
+				};
+			}
+			Object.defineProperty(bm, key, descripter);
 		});
 	}
 }

@@ -1,5 +1,5 @@
 export default {
-	text(node: Node, value: string = 'none'): void {
+	text(node: Element, value: string = 'none'): void {
 		node.textContent = value;
 	},
 	model(node: HTMLInputElement, value: string = ''): void {

@@ -1,6 +1,25 @@
 import { initState, initComputed } from './instance/state';
 import Compiler from './compiler/index';
-import { BueOptions } from '../global';
+import { kvobject } from '../global';
+
+interface ComputedOptions<T> {
+	get(): T;
+	set?: (value: T) => void;
+}
+
+type Accessors<T> = {
+	[K in keyof T]: (() => T[K]) | ComputedOptions<T[K]>;
+};
+
+interface BueOptions {
+	// template?: string;
+	el: string | Element;
+	data: object | (() => object);
+	computed?: Accessors<kvobject>;
+	methods?: {
+		[name: string]: (...args: any[]) => void;
+	};
+}
 
 let uid: number = 0;
 export default class Bue {
@@ -17,5 +36,5 @@ export default class Bue {
 	public _proxy: object;
 	public $options: BueOptions;
 	public $compiler: Compiler;
-	public $el: Node;
+	public $el: Element;
 }

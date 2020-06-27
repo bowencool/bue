@@ -3,24 +3,29 @@ import Watcher from '../observer/Watcher';
 import updaters from './updaters';
 import { getValue, setValue } from '../../utils/index';
 
-export default {
-	text(node: Node, bm: Bue, exp: string) {
+export const DirectiveNames = ['bind'];
+
+interface Utils {
+	[key: string]: Function;
+}
+const utils: Utils = {
+	text(node: Element, bm: Bue, exp: string) {
 		this.bind(node, bm, exp, updaters.text);
 	},
 
-	model(node: Node, bm: Bue, exp: string) {
+	model(node: HTMLInputElement, bm: Bue, exp: string) {
 		// console.log('model', exp);
 		this.bind(node, bm, exp, updaters.model);
 		// const val = getValue(bm, exp);
 		const handler = function(e: InputEvent) {
-			const newValue = e.target.value;
+			const newValue = (e.target as HTMLInputElement).value;
 			setValue(bm, exp, newValue);
 		};
 		node.addEventListener('input', handler);
 		node.addEventListener('change', handler);
 	},
 
-	bind(node: Node, bm: Bue, exp: string, updater?: Function) {
+	bind(node: Element, bm: Bue, exp: string, updater?: Function) {
 		console.group('compiler get initialValue:', exp);
 		const initialValue = getValue(bm, exp);
 		updater && updater(node, initialValue);
@@ -31,10 +36,12 @@ export default {
 		});
 	},
 
-	eventHandler(node: Node, bm: Bue, eventName: string, dir: string): void {
+	eventHandler(node: Element, bm: Bue, eventName: string, dir: string): void {
 		const fn = bm.$options.methods && bm.$options.methods[dir];
 		if (eventName && fn) {
 			node.addEventListener(eventName, fn.bind(bm), false);
 		}
 	},
 };
+
+export default utils;
