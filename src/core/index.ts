@@ -11,7 +11,7 @@ type Accessors<T> = {
 	[K in keyof T]: (() => T[K]) | ComputedOptions<T[K]>;
 };
 
-interface BueOptions {
+export interface BueOptions {
 	// template?: string;
 	el: string | Element;
 	data: object | (() => object);

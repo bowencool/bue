@@ -1,6 +1,6 @@
 {
 	"name": "buejs",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "An MVVM framework",
 	"main": "dist/bue.js",
 	"module": "dist/bue.esm.js",

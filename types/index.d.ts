@@ -1,4 +1,4 @@
-import { BueOptions } from '../src/global';
+import { BueOptions } from '../src/core/index';
 
 export default class Bue {
 	constructor(option: BueOptions);

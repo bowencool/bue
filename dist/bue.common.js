@@ -1,5 +1,5 @@
 /*!
-* buejs v1.0.3
+* buejs v1.0.4
 * Copyright (c) 2019 bowencool
 * Released under the MIT License.
 */
@@ -316,7 +316,7 @@ class Compiler {
         Array.from(node.attributes).forEach(attr => {
             if (/^b-(\w+)/.test(attr.name)) {
                 if (DirectiveNames.includes(RegExp.$1)) {
-                    utils[(RegExp.$1)](node, this.$bm, attr.value);
+                    utils[RegExp.$1](node, this.$bm, attr.value);
                     node.removeAttribute(attr.name);
                 }
             }
